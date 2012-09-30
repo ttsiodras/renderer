@@ -173,23 +173,23 @@ You will be "piloting" around the object with these keys:
   ----------------
   Cmd-line options
   ----------------
-  Usage: renderer [OPTIONS] [FILENAME]
-    -h         this help
-    -r         print FPS reports to stdout (every 5 seconds)
-    -b         benchmark rendering of N frames (default: 100)
-    -n N       set number of benchmarking frames
-    -w         use two lights
-    -m <mode>  rendering mode:
-         1 : point mode
-         2 : points based on triangles (culling,color)
-         3 : triangles, wireframe anti-aliased
-         4 : triangles, ambient colors
-         5 : triangles, Gouraud shading, ZBuffer
-         6 : triangles, per-pixel Phong, ZBuffer
-         7 : triangles, per-pixel Phong, ZBuffer, Shadowmaps
-         8 : triangles, per-pixel Phong, ZBuffer, Soft shadowmaps
-         9 : raytracing, reflections and shadows
-         0 : raytracing, with shadows, reflections and anti-aliasing
+    Usage: renderer [OPTIONS] [FILENAME]
+      -h         this help
+      -r         print FPS reports to stdout (every 5 seconds)
+      -b         benchmark rendering of N frames (default: 100)
+      -n N       set number of benchmarking frames
+      -w         use two lights
+      -m <mode>  rendering mode:
+           1 : point mode
+           2 : points based on triangles (culling,color)
+           3 : triangles, wireframe anti-aliased
+           4 : triangles, ambient colors
+           5 : triangles, Gouraud shading, ZBuffer
+           6 : triangles, per-pixel Phong, ZBuffer
+           7 : triangles, per-pixel Phong, ZBuffer, Shadowmaps
+           8 : triangles, per-pixel Phong, ZBuffer, Soft shadowmaps
+           9 : raytracing, reflections and shadows
+           0 : raytracing, with shadows, reflections and anti-aliasing
 
 Have a look at the other meshes as well (inside the "3D-Objects"
 folder).
@@ -256,25 +256,25 @@ to create:
 
 1. OpenMP binaries for...
 
-- Windows (via TDM/MinGW GCC 4.3.2)
-- Debian Linux Etch (both 32 and 64bit, via manually-built GCC 4.3.2)
-- Debian Linux Etch 32bit (via Intel's 10.1.017 compiler)
+    - Windows (via TDM/MinGW GCC 4.3.2)
+    - Debian Linux Etch (both 32 and 64bit, via manually-built GCC 4.3.2)
+    - Debian Linux Etch 32bit (via Intel's 10.1.017 compiler)
 
 2. TBB binaries ("./configure --disable-openmp --enable-tbb") for...
 
-- Debian Linux Etch (both 32 and 64bit, via manually-built GCC 4.3.2)
-- Debian Linux Etch 32bit (via Intel's 10.1.017 compiler)
-- FreeBSD/64
+    - Debian Linux Etch (both 32 and 64bit, via manually-built GCC 4.3.2)
+    - Debian Linux Etch 32bit (via Intel's 10.1.017 compiler)
+    - FreeBSD/64
 
 3. Single-threaded binaries for...
 
-- Poor OpenBSD/64: it doesn't have real, SMP threads. Not yet, at least.
-  It only has user-space ones (as Linux did at some point). But it does
-  compile the code, albeit in single-threaded mode.
-- Mac OS/X: Tested by a friend with a single core OS/X machine: Compiles
-  and runs just fine (albeit in single-threaded mode).  I don't know if
-  OS/X GCC has adequate support for OpenMP; if it doesn't, GCC 4.3.2
-  will surely be available for it soon.
+    - Poor OpenBSD/64: it doesn't have real, SMP threads. Not yet, at least.
+      It only has user-space ones (as Linux did at some point). But it does
+      compile the code, albeit in single-threaded mode.
+    - Mac OS/X: Tested by a friend with a single core OS/X machine: Compiles
+      and runs just fine (albeit in single-threaded mode).  I don't know if
+      OS/X GCC has adequate support for OpenMP; if it doesn't, GCC 4.3.2
+      will surely be available for it soon.
 
 Talk about portable code!
 

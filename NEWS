@@ -1,0 +1,20 @@
+2009-10-29:
+
+Lots of optimizations, and the code is now as close to perfect
+as I will ever get: there is no repetition anywhere, C++ templates
+are used to create perfect, type-safe versions of the desired
+rasterizer (Gouraud, Phong, shadows, etc). Also, MSVC-specific
+project file (solution) was added.
+
+2009-03-15:
+
+Now supporting meshes saved from shadevis, and interpolating the 
+ambient occlusion factor per pixel - much better looking renders.
+
+2008-11-18:
+
+The package now supports loading of meshes from .3ds files (3D Studio 
+files), via lib3ds. To avoid adding lib3ds as an external dependency 
+(since it appears to currently be in a state of flux), I added version 
+1.3.0 alongside the package sources. It will be auto-built before the
+renderer package.

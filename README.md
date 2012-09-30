@@ -1,4 +1,287 @@
-renderer
-========
+============
+INTRODUCTION
+============
 
-My software-only 3D renderer and raytracer
+This package allows interactive 3D visualization of triangle meshes.
+
+It contains the source code for a straightforward implementation of
+basic principles in polygon-related graphics theory.  You can use these
+sources to familiarize yourself with:
+
+ - 3D transformations
+ - Gouraud shading (complete Phong lighting per vertex)
+ - Phong shading (complete Phong lighting per pixel)
+ - Z-buffering
+ - Shadow mapping (with soft shadows)
+ - Raytracing, with shadows and reflections and anti-aliasing
+ - Portable display and keyboard handling through SDL.
+
+The sources include support for OpenMP and Intel Threading Building
+Blocks, so they take advantage of multi-core CPUs and execute faster.
+
+The supported 3D formats are:
+
+- .3ds, the well known 3D Studio format (via lib3ds), and...
+- .tri, a simple binary dump of vertex and triangle data.
+- .ply (partial support, for 3D objects saved from shadevis)
+
+The code is orchestrated with autoconf/automake, so it compiles and
+runs cleanly on many platforms (tested on Linux/x86, Linux/amd64-em64t,
+Windows/x86 (MinGW), FreeBSD/amd64, Mac OS/X and OpenBSD/amd64).
+For Windows/MSVC users, a separate VisualC/ directory includes
+an MSVC solution, created with the free Visual C++ 2008 Express
+Edition (configured to use Intel Threading Building Blocks).
+
+The sources are available under the GNU license (read COPYING
+for details).
+
+This is more or less a reference implementation. I wanted to write my
+polygon rendering code in as clear a manner as possible, and to also
+add support for shadow mapping and real phong shading. The code uses
+floating point almost everywhere, and calculates the complete lighting
+equation per pixel. When I first wrote this (late 2003), it was far from
+real-time... Then again, as of 2007, a Core2Duo can render the train
+object (see 3D-Objects folder) in soft-shadows mode at around 32fps 
+(under Debian64 with Intel Threading Building Blocks). And since 
+OpenMP/TBB will automatically use as many cores as are available, 
+the multi-core future seems...  interesting :-)
+
+=========
+COMPILING
+=========
+
+Common configuration:
+---------------------
+
+Edit src/Defines.h to change:
+ - window size
+ - Ambient, Diffuse and Specular levels
+
+Edit top of src/Raytracer.cc to change:
+- Whether Reflections are on (default:on)
+- Whether Refractions are on (default:off)
+- Whether Ambient Occlusion is on (default:off)
+- also: parameters of the above
+
+For Windows/MSVC users:
+-----------------------
+
+Just open the project solution (under VisualC/) and compile for
+Release mode. It is configured to use Intel TBB for multithreading,
+since Microsoft decided to omit OpenMP support from the free version
+of its compiler (Visual C++ 2008 Express Edition). All dependencies
+(includes and libraries for SDL and TBB) are pre-packaged under the
+"VisualC" folder, so compilation is as easy as it can get.
+
+When the binary is built, right-click on "Renderer-2.x" in the
+Solution explorer, and select "Properties".  Click on
+"Configuration Properties/Debugging", and enter...
+
+        ..\..\3D-Objects\chessboard.tri
+
+...inside the "Command Arguments" text box. Click on OK, hit Ctrl-F5,
+and you should be seeing the chessboard spinning. Use the controls
+described below (in the KEYS section) to fly around the object.
+
+The compilation options are set for maximum optimization, using
+SSE2 instructions.
+
+If you have the commercial version of the compiler (which supports
+OpenMP) you can switch from TBB to OpenMP:
+
+1. "Configuration Properties - C/C++ - Language - OpenMP:
+   (Set To Yes)
+2. "Configuration Properties - Preprocessor - Definitions:
+   (Change USE_TBB to USE_OPENMP)
+
+...and simply recompile.
+
+For everybody else (Linux, BSDs, Mac OS/X, etc):
+------------------------------------------------
+
+If you don't have SDL installed, download it and install it first
+(http://www.sdl.org). It is required for portable display and keyboard
+handling. I used SDL version 1.2.5 but older versions of the library
+should also work just as well. If you use any of the Linux distros and
+install SDL from packages, make sure you also install the SDL
+development packages (that is, the SDL header files and libraries).
+
+The package includes the sources for lib3ds-1.3.0, so you don't
+need to do anything about lib3ds.
+
+Optionally, if you have a multicore/multi-CPU machine and you want to
+take advantage of your extra cores, you must either have GCC >= 4.3.2
+(which correctly supports OpenMP) or Intel Threading Building Blocks
+(http://www.threadingbuildingblocks.org) installed.
+
+Executive summary:
+
+        ./configure
+        make
+
+If you want to disable the special "snapshot" mode for the raytracer
+(i.e. if you have such a fast machine that you can "fly" even during 
+raytracing) then add the --disable-brakes option to configure:
+
+        ./configure --disable-brakes
+        make
+
+You can enable Intel's Morphological antialiasing using --enable-mlaa.
+Note that it depends on Intel's SSE instructions.
+
+You can control the compilation by passing your own compiler
+flags to 'configure'. For any machine with e.g. SSE2 instructions,
+instead of plain './configure' use:
+
+CXXFLAGS="-O3 -mfpmath=sse -mtune=native -msse -msse2 -mrecip -mstackrealign" ./configure
+
+Compiling with Intel's compiler may also help (on my machine it speeds up
+rendering by 25% compared to the best result with GCC). Just edit and
+use the two build scripts in the contrib/ directory (i.e. fix the TBB
+and ICPC paths and run them).
+
+=======
+RUNNING
+=======
+
+After a successful make, you can perform a quick benchmark for
+comparison with other machines...
+
+        cd 3D-Objects
+        ../src/renderer -b chessboard.tri
+
+...or simply enjoy "flying" around the object with:
+
+        cd 3D-Objects
+        ../src/renderer chessboard.tri
+
+You will be "piloting" around the object with these keys:
+
+  -------------------------------------------
+  KEYS (available only when not benchmarking)
+  -------------------------------------------
+
+  - Hit 'R' to stop/start auto-spin (camera rotates around the object).
+  - Fly using the cursor keys,A,Z - and rotate the light with W and Q.
+  - PgUp/PgDown and the (0-9 keys) change the rendering mode:
+     (Points - Ambient - Gouraud - Phong - Phong and shadows - raycasters)
+  - S and F are 'strafe' left/right
+  - E and D are 'strafe' up/down
+     (strafe keys don't work in auto-spin mode).
+  - ESC quits.
+
+  ----------------
+  Cmd-line options
+  ----------------
+  Usage: renderer [OPTIONS] [FILENAME]
+    -h         this help
+    -r         print FPS reports to stdout (every 5 seconds)
+    -b         benchmark rendering of N frames (default: 100)
+    -n N       set number of benchmarking frames
+    -w         use two lights
+    -m <mode>  rendering mode:
+         1 : point mode
+         2 : points based on triangles (culling,color)
+         3 : triangles, wireframe anti-aliased
+         4 : triangles, ambient colors
+         5 : triangles, Gouraud shading, ZBuffer
+         6 : triangles, per-pixel Phong, ZBuffer
+         7 : triangles, per-pixel Phong, ZBuffer, Shadowmaps
+         8 : triangles, per-pixel Phong, ZBuffer, Soft shadowmaps
+         9 : raytracing, reflections and shadows
+         0 : raytracing, with shadows, reflections and anti-aliasing
+
+Have a look at the other meshes as well (inside the "3D-Objects"
+folder).
+
+==========
+SHADOWMAPS
+==========
+
+If you want to look at the shadowbuffer (curious, are we? :-) just
+uncomment DUMP_SHADOWFILE in src/Light.cc, recompile, run,
+and as soon as you exit, a file will be created in your current
+directory, called "shadow". Then...
+
+    ../src/showShadowMap/showShadowMap
+
+..and you'll get a look at your shadow map.
+
+==================
+TALES OF MULTICORE
+==================
+
+This code was single threaded until late 2007. At that point, I heard
+about OpenMP, and decided to try it out. I was amazed at how easy it was
+to make the code "OpenMP-aware": I simply added a couple of pragmas
+before the for-loops that drew the triangles and the shadow buffers, and
+...presto!
+
+The only things I had to change were static variables, which had to be
+moved to stack space. Threading code can't tolerate global/static data,
+because race conditions immediately appeared when more than one thread
+worked on them.
+
+Only two compilers truly supported OpenMP at the time: Intel's compiler
+(version 8.1) and Microsoft's CL. GCC unfortunately died with 'internal
+compiler error'. I reported this to the GCC forums, found out that
+I was not the only one who had noticed, and was told (by the forum guys)
+to wait.
+
+While waiting for GCC to catch up, I kept researching multicore
+technologies.  Functional languages seem particularly adept to SMP, and
+I've put them next in line in my R&D agenda (Ocaml and F# in
+particular). Before leaving C++ behind, though, I heard about Intel
+Threading Building Blocks (TBB) and decided to put them to the test. TBB
+is a portable set of C++ templates that makes writing threading code a
+lot easier than legacy APIs (CreateThread, _beginthread, pthread_create,
+etc). TBB is also open-source, so it was easy to work with and figure
+out its internals. Truth be told, TBB required a bit more changes in my
+code (OpenMP required almost no changes).  Still, it is a vast
+improvement compared to conventional threading APIs.
+
+I must confess I have not invested a lot of effort in using these
+technologies; I only enhanced my two main rendering loops to make them
+SMP aware. Still, this was enough to boost the speed (on my Core2Duo) by
+80%! Judging by the effort invested, this is one of the best bargains
+I've ever met in my programming career.
+
+As of now (October 2008), GCC 4.3.2 is now up to speed and compiles
+OpenMP code just fine. TBB is of course running perfectly (since it is
+simply a C++ template library), so choose freely between any of the two,
+and easily achieve portable multithreading.
+
+When I say portable, I mean it: "./configure && make" is enough
+to create:
+
+1. OpenMP binaries for...
+
+- Windows (via TDM/MinGW GCC 4.3.2)
+- Debian Linux Etch (both 32 and 64bit, via manually-built GCC 4.3.2)
+- Debian Linux Etch 32bit (via Intel's 10.1.017 compiler)
+
+2. TBB binaries ("./configure --disable-openmp --enable-tbb") for...
+
+- Debian Linux Etch (both 32 and 64bit, via manually-built GCC 4.3.2)
+- Debian Linux Etch 32bit (via Intel's 10.1.017 compiler)
+- FreeBSD/64
+
+3. Single-threaded binaries for...
+
+- Poor OpenBSD/64: it doesn't have real, SMP threads. Not yet, at least.
+  It only has user-space ones (as Linux did at some point). But it does
+  compile the code, albeit in single-threaded mode.
+- Mac OS/X: Tested by a friend with a single core OS/X machine: Compiles
+  and runs just fine (albeit in single-threaded mode).  I don't know if
+  OS/X GCC has adequate support for OpenMP; if it doesn't, GCC 4.3.2
+  will surely be available for it soon.
+
+Talk about portable code!
+
+If you're still in the dark ages and use legacy APIs (like CreateThread,
+_beginthread, pthread_create, etc) you are really missing out.
+
+Enjoy!
+
+Thanassis Tsiodras, Dr.-Ing.
+ttsiodras_at-no-spam_thanks-gmail_dot-com

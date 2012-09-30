@@ -1,0 +1,1381 @@
+2009-11-15  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Base3d.h,
+	renderer-2.x/src/common/Light.cc, renderer-2.x/src/common/Light.h,
+	renderer-2.x/src/common/LightingEq.h,
+	renderer-2.x/src/common/Object3D.cc,
+	renderer-2.x/src/common/ScanConverter.h,
+	renderer-2.x/src/common/Screen.h, renderer-2.x/src/common/Types.h,
+	renderer-2.x/src/renderer/renderer.cc: No floats, use coord (expect
+	for Object3D .tri formats and Pixel)
+
+2009-11-10  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/configure, renderer-2.x/configure.ac: 2.1m
+
+2009-11-10  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Scene.cc: Grouped transformations and
+	projections
+
+2009-11-08  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Object3D.cc: pedantic pass
+
+2009-11-07  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/README: Q in the README
+
+2009-11-07  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Keyboard.cc,
+	renderer-2.x/src/common/Keyboard.h,
+	renderer-2.x/src/renderer/renderer.cc: Q rotates light the other way
+
+2009-11-07  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/common/Scene.cc: Both TBB and OpenMP now work in
+	100tri batches
+
+2009-11-07  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/configure, renderer-2.x/configure.ac: Dynamic OpenMP
+	scheduler
+
+2009-11-07  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/common/Scene.cc: Dynamic OPENMP Scheduler, splits
+	triangles in batches of 100
+
+2009-11-06  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Scene.cc: comment: convex => closed
+
+2009-11-05  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Scene.cc: Not convex, closed
+
+2009-11-05  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/configure, renderer-2.x/configure.ac,
+	renderer-2.x/src/common/Object3D.cc: Made Object.cc better
+
+2009-11-05  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/contrib/build.using.IntelCC.and.OpenMP,
+	renderer-2.x/contrib/build.using.IntelCC.and.TBB: Using latest
+	revision of ICC (11.1.059)
+
+2009-11-04  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/renderer/renderer.cc: temp
+
+2009-11-04  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/renderer/renderer.cc: Minor
+
+2009-11-04  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/configure, renderer-2.x/configure.ac,
+	renderer-2.x/src/renderer/renderer.cc: Hideous GCC 4.4.2 bug
+
+2009-11-04  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Screen.h: Typo
+
+2009-11-04  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/configure: Version 2.1g
+
+2009-11-04  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/VisualC/Renderer-2.x/Renderer-2.x.vcproj,
+	renderer-2.x/src/common/Screen.cc: Not executable, idiotic Windows
+
+2009-11-04  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/VisualC/Renderer-2.x/Renderer-2.x.vcproj,
+	renderer-2.x/configure.ac, renderer-2.x/src/common/Screen.cc: MSVC
+	updates, MSVC no-warnings
+
+2009-11-04  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/.gitignore, renderer-2.x/src/common/Base3d.cc,
+	renderer-2.x/src/common/Base3d.h,
+	renderer-2.x/src/common/Fillers.h,
+	renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/common/LightingEq.h,
+	renderer-2.x/src/common/Makefile.am,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/Object3D.cc,
+	renderer-2.x/src/common/Scene.cc, renderer-2.x/src/common/Scene.h,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h, renderer-2.x/src/common/Types.h,
+	renderer-2.x/src/renderer/renderer.cc: Perfect SDL usage
+
+2009-11-02  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/configure, renderer-2.x/configure.ac: 2.1f, the
+	Fillers-MACROed version
+
+2009-11-02  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Fillers.h: Typo
+
+2009-11-02  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Fillers.h: Compressed Filler actions
+
+2009-11-02  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Fillers.h: Compressed operator definitions
+
+2009-11-02  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/renderer/renderer.cc: Help message was wrong
+
+2009-11-02  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/README: Directions for OpenMP compilation
+
+2009-11-01  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/Makefile.am, renderer-2.x/Makefile.in,
+	renderer-2.x/README: Correct MSVC running instructions
+
+2009-11-01  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/NEWS, renderer-2.x/README,
+	renderer-2.x/VisualC/Renderer-2.x/ReadMe.txt,
+	renderer-2.x/VisualC/Renderer-2.x/Renderer-2.x.sln,
+	renderer-2.x/VisualC/Renderer-2.x/Renderer-2.x.vcproj,
+	renderer-2.x/VisualC/Renderer-2.x/config.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_active.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_audio.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_byteorder.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_cdrom.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_config.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_config_amiga.h
+	,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_config_dreamca
+	st.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_config_macos.h
+	,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_config_macosx.
+	h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_config_minimal
+	.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_config_nds.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_config_os2.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_config_symbian
+	.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_config_win32.h
+	, renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_copying.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_cpuinfo.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_endian.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_error.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_events.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_getenv.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_joystick.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_keyboard.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_keysym.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_loadso.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_main.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_mouse.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_mutex.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_name.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_opengl.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_platform.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_quit.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_rwops.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_stdinc.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_syswm.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_thread.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_timer.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_types.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_version.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/SDL_video.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/begin_code.h,
+	renderer-2.x/VisualC/Renderer-2.x/libSDL/include/close_code.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/_concurrent_queue_inte
+	rnal.h, renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/_tbb_windef.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/aligned_space.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/atomic.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/blocked_range.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/blocked_range2d.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/blocked_range3d.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/cache_aligned_allocato
+	r.h, renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/combinable.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/compat/ppl.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/concurrent_hash_map.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/concurrent_queue.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/concurrent_vector.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/enumerable_thread_spec
+	ific.h, renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/index.html,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/machine/ibm_aix51.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/machine/linux_common.h
+	,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/machine/linux_ia32.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/machine/linux_ia64.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/machine/linux_intel64.
+	h, renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/machine/mac_ppc.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/machine/windows_ia32.h
+	,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/machine/windows_intel6
+	4.h, renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/mutex.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/null_mutex.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/null_rw_mutex.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/parallel_do.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/parallel_for.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/parallel_for_each.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/parallel_invoke.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/parallel_reduce.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/parallel_scan.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/parallel_sort.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/parallel_while.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/partitioner.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/pipeline.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/queuing_mutex.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/queuing_rw_mutex.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/recursive_mutex.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/scalable_allocator.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/spin_mutex.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/spin_rw_mutex.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/task.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/task_group.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/task_scheduler_init.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/task_scheduler_observe
+	r.h, renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/tbb.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/tbb_allocator.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/tbb_config.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/tbb_exception.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/tbb_machine.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/tbb_profiling.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/tbb_stddef.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/tbb_thread.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/tbbmalloc_proxy.h,
+	renderer-2.x/VisualC/Renderer-2.x/libtbb/tbb/tick_count.h: Added
+	MSVC project file
+
+2009-11-01  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Defines.h,
+	renderer-2.x/src/common/Fillers.h,
+	renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/common/LightingEq.h,
+	renderer-2.x/src/common/Object3D.cc,
+	renderer-2.x/src/common/Scene.cc,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h,
+	renderer-2.x/src/renderer/renderer.cc: MSVC warnings
+
+2009-11-01  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/Makefile.am, renderer-2.x/Makefile.in: Now using
+	trainColor.tri
+
+2009-11-01  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/3D-Objects/trainColor.ply: The train NEEDS normals
+
+2009-11-01  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/3D-Objects/trainColor.ply: Make it meshlab compatible
+
+2009-11-01  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/configure, renderer-2.x/configure.ac: Myfloor, hence
+	new version
+
+2009-11-01  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Screen.h: Using myfloor instead of floor -
+	top speed again
+
+2009-11-01  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Screen.cc: Mystery - C++ allowed "and" in
+	the typeid comparison... removed
+
+2009-11-01  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Fillers.h: Comments
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Scene.cc,
+	renderer-2.x/src/common/Scene.h, renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h,
+	renderer-2.x/src/renderer/renderer.cc: Using softshadows without
+	boolean hack
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Algebra.h,
+	renderer-2.x/src/common/Base3d.h,
+	renderer-2.x/src/common/Camera.cc,
+	renderer-2.x/src/common/Camera.h,
+	renderer-2.x/src/common/Fillers.h,
+	renderer-2.x/src/common/Light.cc, renderer-2.x/src/common/Light.h,
+	renderer-2.x/src/common/LightingEq.h,
+	renderer-2.x/src/common/Object3D.cc,
+	renderer-2.x/src/common/ScanConverter.h,
+	renderer-2.x/src/common/Scene.cc,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h, renderer-2.x/src/common/Types.h,
+	renderer-2.x/src/renderer/renderer.cc: Removed trailing whitespace
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/README: Added soft shadows mode
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/renderer/renderer.cc: Added soft shadows mode
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/3D-Objects/pharaoh.ply: Perfect pharaoh - Typo
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/3D-Objects/pharaoh.ply: Perfect pharaoh
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/src/renderer/renderer.cc: Typos
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@gmail.com>
+
+	* renderer-2.x/README, renderer-2.x/src/renderer/renderer.cc: Typos
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/.gitignore: gitignore
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/configure, renderer-2.x/src/common/Makefile.am,
+	renderer-2.x/src/common/Makefile.in: New header file caused
+	autotools changes
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/configure.ac: New release that includes Gouraud
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/renderer/renderer.cc: Report rendering mode in
+	the caption
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Fillers.h,
+	renderer-2.x/src/common/LightingEq.h,
+	renderer-2.x/src/common/Screen.cc: Perfect reuse of the lighting
+	equations
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Fillers.h,
+	renderer-2.x/src/common/LightingEq.h,
+	renderer-2.x/src/common/Screen.cc: Lighting equation is in common
+	place now
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Base3d.h,
+	renderer-2.x/src/common/Defines.h,
+	renderer-2.x/src/common/Fillers.h,
+	renderer-2.x/src/common/Scene.cc, renderer-2.x/src/common/Scene.h,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h, renderer-2.x/src/common/Types.h,
+	renderer-2.x/src/renderer/renderer.cc: Added Gouraud... The circle
+	is complete :-)
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/common/Scene.cc: Use resize for lines, reserve for
+	left and right.
+
+2009-10-31  ttsiod <ttsiod@home.localdomain>
+
+	* renderer-2.x/.gitignore: More .gitignore
+
+2009-10-31  ttsiod <ttsiod@home.localdomain>
+
+	* renderer-2.x/.gitignore, renderer-2.x/configure: gitignore
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/ChangeLog: ChangeLog update
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/configure.ac: Indent
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.in, renderer-2.x/aclocal.m4,
+	renderer-2.x/configure, renderer-2.x/configure.ac,
+	renderer-2.x/lib3ds-1.3.0/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/aclocal.m4,
+	renderer-2.x/lib3ds-1.3.0/config.h.in,
+	renderer-2.x/lib3ds-1.3.0/configure,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/tools/Makefile.in,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/Screen.h,
+	renderer-2.x/src/common/config.h.in,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/showShadowMap/Makefile.in: NDEBUG for assert, added
+	lots of comments in Screen.h
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/ChangeLog, renderer-2.x/Makefile.in,
+	renderer-2.x/aclocal.m4, renderer-2.x/configure,
+	renderer-2.x/configure.ac, renderer-2.x/lib3ds-1.3.0/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/aclocal.m4,
+	renderer-2.x/lib3ds-1.3.0/config.h.in,
+	renderer-2.x/lib3ds-1.3.0/configure,
+	renderer-2.x/lib3ds-1.3.0/lib3ds-config.in,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/ltmain.sh,
+	renderer-2.x/lib3ds-1.3.0/tools/Makefile.in,
+	renderer-2.x/src/common/Fillers.h,
+	renderer-2.x/src/common/Light.cc, renderer-2.x/src/common/Light.h,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/Scene.cc,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/config.h.in,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/renderer/renderer.cc,
+	renderer-2.x/src/showShadowMap/Makefile.in,
+	renderer-2.x/src/showShadowMap/showShadowMap.cc: mainrepos:d25dc12
+	Now doing per-pixel work in camera space only
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/configure, renderer-2.x/configure.ac: 
+	mainrepos:e331032 New version, no more floor
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/configure, renderer-2.x/configure.ac,
+	renderer-2.x/src/common/Fillers.h,
+	renderer-2.x/src/common/Light.cc, renderer-2.x/src/common/Scene.cc,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h,
+	renderer-2.x/src/common/config.h.in: mainrepos:e026714 20% speed
+	increase, removing floor
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/README, renderer-2.x/src/common/Scene.cc,
+	renderer-2.x/src/common/Types.h: mainrepos:c91ef9a Trivial additions
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/configure, renderer-2.x/configure.ac,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/mesh.h,
+	renderer-2.x/src/common/Fillers.h,
+	renderer-2.x/src/common/Scene.cc, renderer-2.x/src/common/Screen.cc: 
+	mainrepos:1bebf33 Added -Wextra and checked with cppcheck
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/renderer/renderer.cc: mainrepos:c8226b2 Finally,
+	freeflight and autorotate in sync
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/renderer/renderer.cc: mainrepos:7a32d17
+	Autorotate in sync with freeflight
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/README, renderer-2.x/aclocal.m4,
+	renderer-2.x/configure: mainrepos:451f1dc Use -mstackrealign
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/3D-Objects/kerolamp.ply,
+	renderer-2.x/3D-Objects/ludwig.ply,
+	renderer-2.x/3D-Objects/millenium.ply,
+	renderer-2.x/3D-Objects/scene.ply,
+	renderer-2.x/3D-Objects/sphere.ply,
+	renderer-2.x/3D-Objects/torus.ply,
+	renderer-2.x/3D-Objects/trainColor.ply,
+	renderer-2.x/3D-Objects/x-wing.ply, renderer-2.x/Makefile.am,
+	renderer-2.x/Makefile.in, renderer-2.x/src/common/Screen.cc: 
+	mainrepos:0f4fa14 Better 3D objects
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.in, renderer-2.x/aclocal.m4,
+	renderer-2.x/configure, renderer-2.x/lib3ds-1.3.0/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/aclocal.m4,
+	renderer-2.x/lib3ds-1.3.0/config.h.in,
+	renderer-2.x/lib3ds-1.3.0/configure,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/tools/Makefile.in,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/Screen.h,
+	renderer-2.x/src/common/config.h.in,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/showShadowMap/Makefile.in: mainrepos:dc553c8
+	Finally, above 10fps
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.in, renderer-2.x/aclocal.m4,
+	renderer-2.x/configure, renderer-2.x/configure.ac,
+	renderer-2.x/lib3ds-1.3.0/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/aclocal.m4,
+	renderer-2.x/lib3ds-1.3.0/config.h.in,
+	renderer-2.x/lib3ds-1.3.0/configure,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/tools/Makefile.in,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/Scene.cc,
+	renderer-2.x/src/common/config.h.in,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/renderer/renderer.cc,
+	renderer-2.x/src/showShadowMap/Makefile.in: mainrepos:77fab57
+	Renderer 2.1
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h: mainrepos:34c01ba PutZDepth is now
+	a template
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h: mainrepos:1ed4bad SOFTSHADOWS
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/contrib/build.using.IntelCC.and.OpenMP,
+	renderer-2.x/contrib/build.using.IntelCC.and.TBB,
+	renderer-2.x/src/common/Fillers.h: mainrepos:e00537a Minor
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.am, renderer-2.x/Makefile.in,
+	renderer-2.x/README, renderer-2.x/configure,
+	renderer-2.x/configure.ac,
+	renderer-2.x/contrib/build.using.IntelCC.and.OpenMP,
+	renderer-2.x/contrib/build.using.IntelCC.and.TBB,
+	renderer-2.x/contrib/config.h, renderer-2.x/src/common/3d.h,
+	renderer-2.x/src/common/Base3d.h,
+	renderer-2.x/src/common/Fillers.h,
+	renderer-2.x/src/common/Keyboard.cc,
+	renderer-2.x/src/common/Keyboard.h,
+	renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/common/Makefile.am,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/ScanConverter.h,
+	renderer-2.x/src/common/Scene.cc, renderer-2.x/src/common/Scene.h,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h, renderer-2.x/src/common/Types.h,
+	renderer-2.x/src/renderer/renderer.cc: mainrepos:57d0d8c Merge
+	branch 'master' of ssh://vm/var/www/MySite
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.am, renderer-2.x/Makefile.in,
+	renderer-2.x/README, renderer-2.x/configure,
+	renderer-2.x/configure.ac,
+	renderer-2.x/contrib/build.using.IntelCC.and.OpenMP,
+	renderer-2.x/contrib/build.using.IntelCC.and.TBB,
+	renderer-2.x/contrib/config.h, renderer-2.x/src/common/3d.h,
+	renderer-2.x/src/common/Base3d.h,
+	renderer-2.x/src/common/Fillers.h,
+	renderer-2.x/src/common/Keyboard.cc,
+	renderer-2.x/src/common/Keyboard.h,
+	renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/common/Makefile.am,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/ScanConverter.h,
+	renderer-2.x/src/common/Scene.cc, renderer-2.x/src/common/Scene.h,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h, renderer-2.x/src/common/Types.h,
+	renderer-2.x/src/renderer/renderer.cc: mainrepos:dffbaec Ambient at
+	100%
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/configure, renderer-2.x/configure.ac,
+	renderer-2.x/src/common/Screen.h: mainrepos:dcfa771 Ambient at 100%
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/README, renderer-2.x/src/common/Fillers.h,
+	renderer-2.x/src/common/Keyboard.cc,
+	renderer-2.x/src/common/Keyboard.h,
+	renderer-2.x/src/common/Scene.cc, renderer-2.x/src/common/Scene.h,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h,
+	renderer-2.x/src/renderer/renderer.cc: mainrepos:42dc75f Added Phong
+	with no shadow, PgUp/PgDown
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Screen.h: mainrepos:f645abc No need for
+	'this' in the template
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.am, renderer-2.x/Makefile.in,
+	renderer-2.x/contrib/build.using.IntelCC.and.OpenMP,
+	renderer-2.x/contrib/build.using.IntelCC.and.TBB,
+	renderer-2.x/contrib/config.h, renderer-2.x/src/common/3d.h,
+	renderer-2.x/src/common/Base3d.h,
+	renderer-2.x/src/common/Fillers.h,
+	renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/common/Makefile.am,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/ScanConverter.h,
+	renderer-2.x/src/common/Scene.cc, renderer-2.x/src/common/Scene.h,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h, renderer-2.x/src/common/Types.h,
+	renderer-2.x/src/renderer/renderer.cc: mainrepos:0f9ad5b Added
+	ambient-only mode and refactored rasterizers into templates
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/README: mainrepos:c5c2fd4 Typo in README
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/README, renderer-2.x/configure,
+	renderer-2.x/configure.ac, renderer-2.x/src/common/Object3D.cc,
+	renderer-2.x/src/common/Scene.cc, renderer-2.x/src/common/Scene.h,
+	renderer-2.x/src/common/config.h.in,
+	renderer-2.x/src/renderer/renderer.cc: mainrepos:5ef2195 Added
+	getopt
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/common/ScanConverter.h,
+	renderer-2.x/src/common/Scene.cc, renderer-2.x/src/common/Screen.h,
+	renderer-2.x/src/renderer/renderer.cc: mainrepos:aaf04b7 Minor
+	optimizations... (fill_n instead of memset in ScanConverter, using
+	reserve instead of resize)
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/showShadowMap/showShadowMap.cc: mainrepos:ce1ae48
+	Trigger intel bug
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.in, renderer-2.x/README,
+	renderer-2.x/aclocal.m4, renderer-2.x/configure,
+	renderer-2.x/lib3ds-1.3.0/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/aclocal.m4,
+	renderer-2.x/lib3ds-1.3.0/config.h.in,
+	renderer-2.x/lib3ds-1.3.0/configure,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/tools/Makefile.in,
+	renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/config.h.in,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/showShadowMap/Makefile.in,
+	renderer-2.x/src/showShadowMap/showShadowMap.cc: mainrepos:c854918
+	Fixed showshadowmap
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.in, renderer-2.x/aclocal.m4,
+	renderer-2.x/configure, renderer-2.x/configure.ac,
+	renderer-2.x/lib3ds-1.3.0/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/aclocal.m4,
+	renderer-2.x/lib3ds-1.3.0/config.h.in,
+	renderer-2.x/lib3ds-1.3.0/configure,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/tools/Makefile.in,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/config.h.in,
+	renderer-2.x/src/renderer/Makefile.am,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/showShadowMap/Makefile.in: mainrepos:1c56b07 Added
+	stack size boost for MinGW
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/README,
+	renderer-2.x/contrib/build.using.IntelCC.and.OpenMP,
+	renderer-2.x/contrib/build.using.IntelCC.and.TBB,
+	renderer-2.x/src/common/3d.h, renderer-2.x/src/common/Defines.h,
+	renderer-2.x/src/common/Light.cc, renderer-2.x/src/common/Light.h,
+	renderer-2.x/src/common/Makefile.am,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/Scene.cc, renderer-2.x/src/common/Scene.h,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h,
+	renderer-2.x/src/common/Templates.h,
+	renderer-2.x/src/renderer/renderer.cc: mainrepos:1d6b677 Reverted
+	code mayhem due to templates... just using preprocessor
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/README, renderer-2.x/configure,
+	renderer-2.x/configure.ac,
+	renderer-2.x/contrib/build.using.IntelCC.and.OpenMP,
+	renderer-2.x/src/common/3d.h, renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/common/Light.h,
+	renderer-2.x/src/common/Makefile.am,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/Object3D.cc,
+	renderer-2.x/src/common/ScanConverter.h,
+	renderer-2.x/src/common/Scene.cc, renderer-2.x/src/common/Scene.h,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h,
+	renderer-2.x/src/common/Templates.h,
+	renderer-2.x/src/renderer/renderer.cc: mainrepos:7721ff0 Now using
+	compile-time constant screen sizes, thru templates for Screen and
+	Scene
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.in, renderer-2.x/aclocal.m4,
+	renderer-2.x/configure, renderer-2.x/configure.ac,
+	renderer-2.x/contrib/build.using.IntelCC.and.OpenMP,
+	renderer-2.x/contrib/build.using.IntelCC.and.TBB,
+	renderer-2.x/lib3ds-1.3.0/INSTALL,
+	renderer-2.x/lib3ds-1.3.0/Makefile.am,
+	renderer-2.x/lib3ds-1.3.0/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/aclocal.m4,
+	renderer-2.x/lib3ds-1.3.0/config.guess,
+	renderer-2.x/lib3ds-1.3.0/config.h.in,
+	renderer-2.x/lib3ds-1.3.0/config.sub,
+	renderer-2.x/lib3ds-1.3.0/configure,
+	renderer-2.x/lib3ds-1.3.0/configure.in,
+	renderer-2.x/lib3ds-1.3.0/depcomp,
+	renderer-2.x/lib3ds-1.3.0/install-sh,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/ltmain.sh,
+	renderer-2.x/lib3ds-1.3.0/m4/libtool.m4,
+	renderer-2.x/lib3ds-1.3.0/m4/ltoptions.m4,
+	renderer-2.x/lib3ds-1.3.0/m4/ltsugar.m4,
+	renderer-2.x/lib3ds-1.3.0/m4/ltversion.m4,
+	renderer-2.x/lib3ds-1.3.0/m4/lt~obsolete.m4,
+	renderer-2.x/lib3ds-1.3.0/missing,
+	renderer-2.x/lib3ds-1.3.0/tools/Makefile.in,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/Object3D.cc,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h,
+	renderer-2.x/src/common/config.h.in,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/showShadowMap/Makefile.in: mainrepos:ae46258 Loads
+	all types of .tri, uses template magic for BitBlt, etc
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/ChangeLog, renderer-2.x/NEWS,
+	renderer-2.x/src/common/Exceptions.h,
+	renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/common/Object3D.cc,
+	renderer-2.x/src/common/ScanConverter.h,
+	renderer-2.x/src/common/Scene.cc, renderer-2.x/src/common/Scene.h,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h,
+	renderer-2.x/src/renderer/renderer.cc: mainrepos:f76f399 Fixed MSVC
+	warnings
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Scene.cc,
+	renderer-2.x/src/common/Screen.cc: mainrepos:2f67c3a Ambient at 96,
+	diffuse at 128
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/3D-Objects/kerolamp.ply, renderer-2.x/Makefile.am,
+	renderer-2.x/Makefile.in: mainrepos:e57e658 Added kerolamp
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/renderer/renderer.cc: mainrepos:0bb9668 Adaptive
+	delta angle by framerate
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/configure, renderer-2.x/configure.ac,
+	renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/common/Object3D.cc,
+	renderer-2.x/src/common/ScanConverter.h,
+	renderer-2.x/src/common/Scene.cc,
+	renderer-2.x/src/common/Screen.cc, renderer-2.x/src/common/Screen.h: 
+	mainrepos:a0c0316 Removed -Wall messages
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/3D-Objects/pharaoh.ply: mainrepos:3a560a7 Golden
+	pharaoh
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/3D-Objects/pharaoh.ply,
+	renderer-2.x/3D-Objects/tie.ply,
+	renderer-2.x/3D-Objects/trainColor.ply,
+	renderer-2.x/3D-Objects/x-wing.ply, renderer-2.x/Makefile.am,
+	renderer-2.x/Makefile.in, renderer-2.x/src/common/Screen.cc: 
+	mainrepos:8a32cbc Use more shadevis models
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/3D-Objects/statue.ply, renderer-2.x/ChangeLog,
+	renderer-2.x/Makefile.am, renderer-2.x/Makefile.in,
+	renderer-2.x/README, renderer-2.x/aclocal.m4,
+	renderer-2.x/configure, renderer-2.x/configure.ac,
+	renderer-2.x/lib3ds-1.3.0/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/aclocal.m4,
+	renderer-2.x/lib3ds-1.3.0/configure,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/tools/Makefile.in,
+	renderer-2.x/src/common/Base3d.h,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/Object3D.cc,
+	renderer-2.x/src/common/Scene.cc,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/showShadowMap/Makefile.in: mainrepos:8693662
+	Ambient occlusion
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.in, renderer-2.x/aclocal.m4,
+	renderer-2.x/configure, renderer-2.x/lib3ds-1.3.0/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/aclocal.m4,
+	renderer-2.x/lib3ds-1.3.0/configure,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/tools/Makefile.in,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/ScanConverter.h,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/showShadowMap/Makefile.in: mainrepos:edfa105
+	unsigned _height turned to int
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/common/ScanConverter.h,
+	renderer-2.x/src/common/Screen.cc: mainrepos:a7293c5 Darn, sign bug
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/ChangeLog, renderer-2.x/Makefile.in,
+	renderer-2.x/aclocal.m4, renderer-2.x/configure,
+	renderer-2.x/configure.ac, renderer-2.x/lib3ds-1.3.0/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/aclocal.m4,
+	renderer-2.x/lib3ds-1.3.0/configure,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/tools/Makefile.in,
+	renderer-2.x/src/common/Defines.h,
+	renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/ScanConverter.h,
+	renderer-2.x/src/common/Scene.cc,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/renderer/renderer.cc,
+	renderer-2.x/src/showShadowMap/Makefile.in: mainrepos:d69a3cf Added
+	clipping in ScanConvert
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/ChangeLog, renderer-2.x/configure,
+	renderer-2.x/configure.ac: mainrepos:b685214 Pump up the version no
+	for tri-normals from .3ds (and not avg of vertex ones)
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Base3d.h,
+	renderer-2.x/src/common/Object3D.cc: mainrepos:7608745 Added
+	triangle normal from 3DS info, since avg of vertex normals is not
+	always correct
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Screen.cc: mainrepos:747d0cf 003 back to
+	001... z shadow hints are tough...
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/INSTALL, renderer-2.x/Makefile.am,
+	renderer-2.x/Makefile.in, renderer-2.x/NEWS, renderer-2.x/README,
+	renderer-2.x/ac-macros/lib3ds.m4, renderer-2.x/acinclude.m4,
+	renderer-2.x/configure, renderer-2.x/configure.ac,
+	renderer-2.x/lib3ds-1.3.0/3ds-utils.spec.in,
+	renderer-2.x/lib3ds-1.3.0/AUTHORS,
+	renderer-2.x/lib3ds-1.3.0/COPYING,
+	renderer-2.x/lib3ds-1.3.0/ChangeLog,
+	renderer-2.x/lib3ds-1.3.0/INSTALL,
+	renderer-2.x/lib3ds-1.3.0/Makefile.am,
+	renderer-2.x/lib3ds-1.3.0/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/NEWS, renderer-2.x/lib3ds-1.3.0/README,
+	renderer-2.x/lib3ds-1.3.0/TODO,
+	renderer-2.x/lib3ds-1.3.0/aclocal.m4,
+	renderer-2.x/lib3ds-1.3.0/config.guess,
+	renderer-2.x/lib3ds-1.3.0/config.h.in,
+	renderer-2.x/lib3ds-1.3.0/config.sub,
+	renderer-2.x/lib3ds-1.3.0/configure,
+	renderer-2.x/lib3ds-1.3.0/configure.in,
+	renderer-2.x/lib3ds-1.3.0/depcomp,
+	renderer-2.x/lib3ds-1.3.0/examples/3dsplay.c,
+	renderer-2.x/lib3ds-1.3.0/install-sh,
+	renderer-2.x/lib3ds-1.3.0/lib3ds-config.1,
+	renderer-2.x/lib3ds-1.3.0/lib3ds-config.1.in,
+	renderer-2.x/lib3ds-1.3.0/lib3ds-config.in,
+	renderer-2.x/lib3ds-1.3.0/lib3ds.m4,
+	renderer-2.x/lib3ds-1.3.0/lib3ds.spec.in,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/Makefile.am,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/Makefile.in,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/atmosphere.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/atmosphere.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/background.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/background.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/camera.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/camera.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/chunk.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/chunk.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/chunktable.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/chunktable.sed,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/ease.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/ease.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/file.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/file.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/io.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/io.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/light.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/light.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/material.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/material.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/matrix.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/matrix.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/mesh.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/mesh.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/node.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/node.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/quat.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/quat.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/shadow.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/shadow.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/tcb.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/tcb.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/tracks.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/tracks.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/types.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/types.txt,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/vector.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/vector.h,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/viewport.c,
+	renderer-2.x/lib3ds-1.3.0/lib3ds/viewport.h,
+	renderer-2.x/lib3ds-1.3.0/ltmain.sh,
+	renderer-2.x/lib3ds-1.3.0/missing,
+	renderer-2.x/lib3ds-1.3.0/msvc8/3dsdump.vcproj,
+	renderer-2.x/lib3ds-1.3.0/msvc8/3dsplay.vcproj,
+	renderer-2.x/lib3ds-1.3.0/msvc8/lib3ds.rc,
+	renderer-2.x/lib3ds-1.3.0/msvc8/lib3ds.sln,
+	renderer-2.x/lib3ds-1.3.0/msvc8/lib3ds.vcproj,
+	renderer-2.x/lib3ds-1.3.0/tools/3dsdump.1,
+	renderer-2.x/lib3ds-1.3.0/tools/3dsdump.1.in,
+	renderer-2.x/lib3ds-1.3.0/tools/3dsdump.c,
+	renderer-2.x/lib3ds-1.3.0/tools/Makefile.am,
+	renderer-2.x/lib3ds-1.3.0/tools/Makefile.in,
+	renderer-2.x/src/common/Makefile.am,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/Object3D.cc,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/config.h.in,
+	renderer-2.x/src/renderer/Makefile.am,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/showShadowMap/Makefile.in: mainrepos:7ed3dbc Now
+	includes lib3ds 1.3.0 inside it
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Object3D.cc: mainrepos:ab0f32f Support
+	both .3ds and .3DS
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Object3D.cc: mainrepos:89481d7 If a mesh
+	has no points or faces, don't abort, just skip it
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/3D-Objects/cube.tra, renderer-2.x/ChangeLog,
+	renderer-2.x/Makefile.am, renderer-2.x/Makefile.in,
+	renderer-2.x/README, renderer-2.x/ac-macros/lib3ds.m4,
+	renderer-2.x/acinclude.m4, renderer-2.x/configure,
+	renderer-2.x/configure.ac,
+	renderer-2.x/contrib/build.using.IntelCC.and.OpenMP,
+	renderer-2.x/contrib/build.using.IntelCC.and.TBB,
+	renderer-2.x/contrib/config.h, renderer-2.x/src/common/Base3d.h,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/Object3D.cc,
+	renderer-2.x/src/common/Scene.cc,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/config.h.in,
+	renderer-2.x/src/cubes/Makefile.am,
+	renderer-2.x/src/cubes/Makefile.in,
+	renderer-2.x/src/cubes/cubes.cc,
+	renderer-2.x/src/renderer/Makefile.am,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/renderer/renderer.cc,
+	renderer-2.x/src/showShadowMap/Makefile.in: mainrepos:292ab35 lib3ds
+	added
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.in, renderer-2.x/configure,
+	renderer-2.x/configure.ac, renderer-2.x/src/common/Algebra.cc,
+	renderer-2.x/src/common/Camera.cc,
+	renderer-2.x/src/common/Keyboard.cc,
+	renderer-2.x/src/common/Light.cc,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/Object3D.cc,
+	renderer-2.x/src/common/Scene.cc,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/config.h.in,
+	renderer-2.x/src/cubes/Makefile.in,
+	renderer-2.x/src/cubes/cubes.cc,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/renderer/renderer.cc,
+	renderer-2.x/src/showShadowMap/Makefile.in,
+	renderer-2.x/src/showShadowMap/showShadowMap.cc: mainrepos:4090f62
+	Added config.h
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/README, renderer-2.x/src/renderer/renderer.cc: 
+	mainrepos:5b20624 Added autospin
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Screen.h: mainrepos:061a54c Use SDL the
+	proper way, 25% speed increase
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/AUTHORS, renderer-2.x/src/common/3d.h,
+	renderer-2.x/src/common/Algebra.cc,
+	renderer-2.x/src/common/Algebra.h,
+	renderer-2.x/src/common/Base3d.h,
+	renderer-2.x/src/common/Camera.cc,
+	renderer-2.x/src/common/Camera.h, renderer-2.x/src/common/Clock.h,
+	renderer-2.x/src/common/Defines.h,
+	renderer-2.x/src/common/Exceptions.h,
+	renderer-2.x/src/common/Keyboard.cc,
+	renderer-2.x/src/common/Keyboard.h,
+	renderer-2.x/src/common/Light.cc, renderer-2.x/src/common/Light.h,
+	renderer-2.x/src/common/Object3D.cc,
+	renderer-2.x/src/common/Scene.cc, renderer-2.x/src/common/Scene.h,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h, renderer-2.x/src/common/Types.h,
+	renderer-2.x/src/cubes/cubes.cc,
+	renderer-2.x/src/renderer/renderer.cc,
+	renderer-2.x/src/showShadowMap/showShadowMap.cc: mainrepos:144fd7f
+	No more softlab
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/README, renderer-2.x/configure,
+	renderer-2.x/configure.ac, renderer-2.x/src/common/Base3d.h,
+	renderer-2.x/src/common/Defines.h,
+	renderer-2.x/src/common/Light.cc, renderer-2.x/src/common/Light.h,
+	renderer-2.x/src/common/Makefile.am,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/ScanConverter.h,
+	renderer-2.x/src/common/Scene.cc,
+	renderer-2.x/src/common/Screen.cc, renderer-2.x/src/common/Screen.h: 
+	mainrepos:df0d100 C++ Templates code refactoring
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/ChangeLog, renderer-2.x/README,
+	renderer-2.x/src/common/Light.cc, renderer-2.x/src/common/Light.h,
+	renderer-2.x/src/common/Light.normal.inc,
+	renderer-2.x/src/common/Light.openmp.inc,
+	renderer-2.x/src/common/Light.tbb.inc,
+	renderer-2.x/src/common/Makefile.am,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/Scene.cc,
+	renderer-2.x/src/common/Scene.normal.inc,
+	renderer-2.x/src/common/Scene.openmp.inc,
+	renderer-2.x/src/common/Scene.tbb.inc,
+	renderer-2.x/src/common/Screen.h: mainrepos:4e438e5 One Scene.cc and
+	one Light.cc for all three modes - no more .inc
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Scene.openmp.inc,
+	renderer-2.x/src/common/Screen.cc, renderer-2.x/src/common/Screen.h: 
+	mainrepos:6ba9776 Better speed (BGR), better phrasing
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/README: mainrepos:99b3886 Added -mrecip
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/README, renderer-2.x/configure,
+	renderer-2.x/configure.ac: mainrepos:4de7ad6 READMEs, some autoconf
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.am, renderer-2.x/Makefile.in,
+	renderer-2.x/README, renderer-2.x/ac-macros/ax_openmp.m4,
+	renderer-2.x/acinclude.m4,
+	renderer-2.x/build.using.IntelCC.and.TBB, renderer-2.x/configure,
+	renderer-2.x/configure.ac,
+	renderer-2.x/contrib/build.using.IntelCC.and.OpenMP,
+	renderer-2.x/contrib/build.using.IntelCC.and.TBB,
+	renderer-2.x/src/common/Defines.h,
+	renderer-2.x/src/common/Keyboard.cc,
+	renderer-2.x/src/common/Keyboard.h,
+	renderer-2.x/src/common/Light.cc, renderer-2.x/src/common/Light.h,
+	renderer-2.x/src/common/Light.normal.inc,
+	renderer-2.x/src/common/Light.openmp.inc,
+	renderer-2.x/src/common/Light.tbb.inc,
+	renderer-2.x/src/common/Makefile.am,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/Scene.cc,
+	renderer-2.x/src/common/Scene.normal.inc,
+	renderer-2.x/src/common/Scene.openmp.inc,
+	renderer-2.x/src/common/Scene.tbb.inc,
+	renderer-2.x/src/common/Screen.h,
+	renderer-2.x/src/cubes/Makefile.am,
+	renderer-2.x/src/cubes/Makefile.in,
+	renderer-2.x/src/cubes/cubes.cc,
+	renderer-2.x/src/renderer/Makefile.am,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/renderer/renderer.cc,
+	renderer-2.x/src/showShadowMap/Makefile.in: mainrepos:f80284a New
+	version, includes OpenMP as well
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/README, renderer-2.x/src/common/Camera.h,
+	renderer-2.x/src/renderer/renderer.cc: mainrepos:bf83111 Added full
+	strafe with SDEF
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.am, renderer-2.x/Makefile.in: 
+	mainrepos:4d1af6f Some new 3D objects
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/configure: mainrepos:14a62c8 Forgot to autoreconf
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/configure.ac: mainrepos:39c9337 When --enable-debug
+	is used, disable the optimization options
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/README, renderer-2.x/build.using.IntelCC.and.TBB,
+	renderer-2.x/src/common/Screen.cc: mainrepos:0b78513 Soft shadows
+	added
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/common/Base3d.h,
+	renderer-2.x/src/common/Defines.h,
+	renderer-2.x/src/common/Object3D.cc: mainrepos:2ce5c6d Now
+	supporting TRIMAGIC (i.e. no normal info per vertex)
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.in, renderer-2.x/configure,
+	renderer-2.x/configure.ac, renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/cubes/Makefile.in,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/showShadowMap/Makefile.in: mainrepos:9ed6cbc Added
+	more stuff to configure.ac through autoscan
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/README: mainrepos:3b26f56 Better text
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.in,
+	renderer-2.x/ac-macros/ax_cflags_gcc_option.m4,
+	renderer-2.x/acinclude.m4, renderer-2.x/aclocal.m4,
+	renderer-2.x/configure, renderer-2.x/configure.ac,
+	renderer-2.x/configure.in, renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/cubes/Makefile.in,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/showShadowMap/Makefile.in: mainrepos:4b21b5b Use
+	autoconf with external macros separately
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/showShadowMap/showShadowMap.cc: mainrepos:b69a1e6
+	Out of bounds, caught in OpenBSD
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/AUTHORS, renderer-2.x/COPYING,
+	renderer-2.x/ChangeLog, renderer-2.x/INSTALL,
+	renderer-2.x/Makefile.am, renderer-2.x/Makefile.in,
+	renderer-2.x/Makefile.template, renderer-2.x/NEWS,
+	renderer-2.x/README, renderer-2.x/aclocal.m4,
+	renderer-2.x/build-aux/config.guess,
+	renderer-2.x/build-aux/config.sub, renderer-2.x/build-aux/depcomp,
+	renderer-2.x/build-aux/install-sh, renderer-2.x/build-aux/missing,
+	renderer-2.x/build.With.IntelCC.using.TBB,
+	renderer-2.x/build.using.IntelCC.and.TBB, renderer-2.x/configure,
+	renderer-2.x/configure.in, renderer-2.x/include/3d.h,
+	renderer-2.x/include/Algebra.h, renderer-2.x/include/Base3d.h,
+	renderer-2.x/include/Camera.h, renderer-2.x/include/Clock.h,
+	renderer-2.x/include/Defines.h, renderer-2.x/include/Exceptions.h,
+	renderer-2.x/include/Keyboard.h, renderer-2.x/include/Light.h,
+	renderer-2.x/include/Scene.h, renderer-2.x/include/Screen.h,
+	renderer-2.x/include/Types.h, renderer-2.x/src/Algebra.cc,
+	renderer-2.x/src/Camera.cc, renderer-2.x/src/Keyboard.cc,
+	renderer-2.x/src/Light.cc, renderer-2.x/src/Object3D.cc,
+	renderer-2.x/src/Scene.cc, renderer-2.x/src/Screen.cc,
+	renderer-2.x/src/common/3d.h, renderer-2.x/src/common/Algebra.cc,
+	renderer-2.x/src/common/Algebra.h,
+	renderer-2.x/src/common/Base3d.h,
+	renderer-2.x/src/common/Camera.cc,
+	renderer-2.x/src/common/Camera.h, renderer-2.x/src/common/Clock.h,
+	renderer-2.x/src/common/Defines.h,
+	renderer-2.x/src/common/Exceptions.h,
+	renderer-2.x/src/common/Keyboard.cc,
+	renderer-2.x/src/common/Keyboard.h,
+	renderer-2.x/src/common/Light.cc, renderer-2.x/src/common/Light.h,
+	renderer-2.x/src/common/Makefile.am,
+	renderer-2.x/src/common/Makefile.in,
+	renderer-2.x/src/common/Object3D.cc,
+	renderer-2.x/src/common/Scene.cc, renderer-2.x/src/common/Scene.h,
+	renderer-2.x/src/common/Screen.cc,
+	renderer-2.x/src/common/Screen.h, renderer-2.x/src/common/Types.h,
+	renderer-2.x/src/cubes.cc, renderer-2.x/src/cubes/Makefile.am,
+	renderer-2.x/src/cubes/Makefile.in,
+	renderer-2.x/src/cubes/cubes.cc, renderer-2.x/src/renderer.cc,
+	renderer-2.x/src/renderer/Makefile.am,
+	renderer-2.x/src/renderer/Makefile.in,
+	renderer-2.x/src/renderer/renderer.cc,
+	renderer-2.x/src/showShadowMap.cc,
+	renderer-2.x/src/showShadowMap/Makefile.am,
+	renderer-2.x/src/showShadowMap/Makefile.in,
+	renderer-2.x/src/showShadowMap/showShadowMap.cc: mainrepos:4ff2b58
+	Last of the autoconfs: renderer-2.0e
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.template: mainrepos:a7adaaf Use Debian
+	version of TBB
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.template, renderer-2.x/include/Screen.h,
+	renderer-2.x/src/Screen.cc, renderer-2.x/src/showShadowMap.cc: 
+	mainrepos:8ba826b Fixed errors for GCC4.4 and code generation issue
+	with fpmath=sse
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.template: mainrepos:0f085fd Add Makefile to
+	the dependencies
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/Makefile.template: mainrepos:5fec5b3 Use 'mkdir -p'
+	for dirs
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/README, renderer-2.x/src/Light.cc,
+	renderer-2.x/src/Scene.cc: mainrepos:49505a7 Adapt to number of
+	triangles, up to 16 cores
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/cubes.cc: mainrepos:281a439 Fixed cubes with TBB
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/.cvsignore, renderer-2.x/Makefile.template,
+	renderer-2.x/README, renderer-2.x/build.With.IntelCC.using.OpenMP,
+	renderer-2.x/build.With.IntelCC.using.TBB,
+	renderer-2.x/include/Light.h, renderer-2.x/include/Screen.h,
+	renderer-2.x/src/Light.cc, renderer-2.x/src/Scene.cc,
+	renderer-2.x/src/Screen.cc, renderer-2.x/src/renderer.cc: 
+	mainrepos:81b1b6a Switched from OpenMP to Intel TBB
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/Scene.cc: mainrepos:86db037 Added critical
+	section for BitBlt
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/src/Light.cc, renderer-2.x/src/Scene.cc,
+	renderer-2.x/src/Screen.cc, renderer-2.x/src/cubes.cc,
+	renderer-2.x/src/renderer.cc: mainrepos:4cec764 Used ifdefs in all
+	OpenMP places
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/.cvsignore, renderer-2.x/ChangeLog,
+	renderer-2.x/README, renderer-2.x/build.With.IntelCC.using.OpenMP,
+	renderer-2.x/src/Light.cc, renderer-2.x/src/Scene.cc,
+	renderer-2.x/src/renderer.cc: mainrepos:0a5ae68 Better OpenMP
+	support for ICC and MSVC
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/build.With.IntelCC.using.OpenMP,
+	renderer-2.x/build.With.IntelCC81: mainrepos:fcc68ce Using Intel
+	compiler 10.1.012
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/ChangeLog, renderer-2.x/src/renderer.cc: 
+	mainrepos:4298c64 Corrected strafe
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/ChangeLog, renderer-2.x/src/Scene.cc: 
+	mainrepos:bdcff5b Don't render triangles that pierce the screen
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/ChangeLog, renderer-2.x/build.With.IntelCC81,
+	renderer-2.x/include/Light.h, renderer-2.x/src/Light.cc,
+	renderer-2.x/src/Screen.cc: mainrepos:207fac4 Used OpenMP for
+	shadows as well
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* renderer-2.x/ChangeLog, renderer-2.x/Makefile.template,
+	renderer-2.x/README, renderer-2.x/build.With.IntelCC81,
+	renderer-2.x/include/Screen.h, renderer-2.x/src/Scene.cc,
+	renderer-2.x/src/Screen.cc: mainrepos:19be579 Added
+	renderer-2.0d.tar.bz2
+
+2009-10-31  Thanassis Tsiodras <ttsiodras@semantix.gr>
+
+	* mainrepos:3f2d335 Initial commit
+

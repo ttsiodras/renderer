@@ -1,0 +1,24 @@
+-------------------------------------------
+KEYS (available only when not benchmarking)
+-------------------------------------------
+
+- Hit 'R' to stop/start auto-rotation of the camera around the object.
+- Fly using the cursor keys,A,Z - and rotate the light with W and Q.
+- S and F are 'strafe' left/right
+- E and D are 'strafe' up/down
+  (strafe keys don't work in auto-rotation mode).
+- PgUp/PgDown, as well as the numeric keys (1-9 and 0) change the 
+  rendering mode:
+   1 : point mode
+   2 : points based on triangles (culling,color)
+   3 : triangles, wireframe, anti-aliased
+   4 : triangles, interpolated ambient (occlusion data too, if available)
+   5 : triangles, Gouraud shading, ZBuffer
+   6 : triangles, per-pixel Phong, ZBuffer
+   7 : triangles, per-pixel Phong, ZBuffer, Shadowmaps
+   8 : triangles, per-pixel Phong, ZBuffer, Soft shadowmaps
+   9 : raytracing, with shadows and reflections
+   0 : raytracing, with shadows, reflections and anti-aliasing
+- ESC quits.
+
+Now hit 'H' again to close this help screen.

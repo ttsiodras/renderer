@@ -1,6 +1,6 @@
-============
-INTRODUCTION
-============
+*Screenshots, official tarballs, etc available at [main renderer page](http://users.softlab.ntua.gr/~ttsiod/renderer.html)*
+
+## Introduction
 
 This package allows interactive 3D visualization of triangle meshes.
 
@@ -46,12 +46,9 @@ object (see 3D-Objects folder) in soft-shadows mode at around 32fps
 OpenMP/TBB will automatically use as many cores as are available, 
 the multi-core future seems...  interesting :-)
 
-=========
-COMPILING
-=========
+## Compiling
 
-Common configuration:
----------------------
+### Common configuration:
 
 Edit src/Defines.h to change:
  - window size
@@ -63,8 +60,7 @@ Edit top of src/Raytracer.cc to change:
 - Whether Ambient Occlusion is on (default:off)
 - also: parameters of the above
 
-For Windows/MSVC users:
------------------------
+### For Windows/MSVC users:
 
 Just open the project solution (under VisualC/) and compile for
 Release mode. It is configured to use Intel TBB for multithreading,
@@ -96,17 +92,19 @@ OpenMP) you can switch from TBB to OpenMP:
 
 ...and simply recompile.
 
-For everybody else (Linux, BSDs, Mac OS/X, etc):
-------------------------------------------------
+### For everybody else (Linux, BSDs, Mac OS/X, etc):
 
 If you don't have SDL installed, download it and install it first
 (http://www.sdl.org). It is required for portable display and keyboard
 handling. I used SDL version 1.2.5 but older versions of the library
 should also work just as well. If you use any of the Linux distros and
 install SDL from packages, make sure you also install the SDL
-development packages (that is, the SDL header files and libraries).
+development packages (that is, the SDL header files and libraries);
+so e.g. for Debian...
 
-The package includes the sources for lib3ds-1.3.0, so you don't
+    $ sudo apt-get install libsdl1.2-dev
+
+The renderer includes the sources for lib3ds-1.3.0, so you don't
 need to do anything about lib3ds.
 
 Optionally, if you have a multicore/multi-CPU machine and you want to
@@ -140,9 +138,7 @@ rendering by 25% compared to the best result with GCC). Just edit and
 use the two build scripts in the contrib/ directory (i.e. fix the TBB
 and ICPC paths and run them).
 
-=======
-RUNNING
-=======
+## Running
 
 After a successful make, you can perform a quick benchmark for
 comparison with other machines...
@@ -157,9 +153,7 @@ comparison with other machines...
 
 You will be "piloting" around the object with these keys:
 
-  -------------------------------------------
-  KEYS (available only when not benchmarking)
-  -------------------------------------------
+### KEYS (available only when not benchmarking)
 
   - Hit 'R' to stop/start auto-spin (camera rotates around the object).
   - Fly using the cursor keys,A,Z - and rotate the light with W and Q.
@@ -170,9 +164,8 @@ You will be "piloting" around the object with these keys:
      (strafe keys don't work in auto-spin mode).
   - ESC quits.
 
-  ----------------
-  Cmd-line options
-  ----------------
+### Cmd-line options
+
     Usage: renderer [OPTIONS] [FILENAME]
       -h         this help
       -r         print FPS reports to stdout (every 5 seconds)
@@ -194,9 +187,7 @@ You will be "piloting" around the object with these keys:
 Have a look at the other meshes as well (inside the "3D-Objects"
 folder).
 
-==========
-SHADOWMAPS
-==========
+## Shadowmaps
 
 If you want to look at the shadowbuffer (curious, are we? :-) just
 uncomment DUMP_SHADOWFILE in src/Light.cc, recompile, run,
@@ -207,9 +198,7 @@ directory, called "shadow". Then...
 
 ..and you'll get a look at your shadow map.
 
-==================
-TALES OF MULTICORE
-==================
+## Tales of multi-core programming
 
 This code was single threaded until late 2007. At that point, I heard
 about OpenMP, and decided to try it out. I was amazed at how easy it was
@@ -255,19 +244,16 @@ When I say portable, I mean it: "./configure && make" is enough
 to create:
 
 - OpenMP binaries for...
-
     - Windows (via TDM/MinGW GCC 4.3.2)
     - Debian Linux Etch (both 32 and 64bit, via manually-built GCC 4.3.2)
     - Debian Linux Etch 32bit (via Intel's 10.1.017 compiler)
 
 - TBB binaries ("./configure --disable-openmp --enable-tbb") for...
-
     - Debian Linux Etch (both 32 and 64bit, via manually-built GCC 4.3.2)
     - Debian Linux Etch 32bit (via Intel's 10.1.017 compiler)
     - FreeBSD/64
 
 - Single-threaded binaries for...
-
     - Poor OpenBSD/64: it doesn't have real, SMP threads. Not yet, at least.
       It only has user-space ones (as Linux did at some point). But it does
       compile the code, albeit in single-threaded mode.
@@ -284,4 +270,5 @@ _beginthread, pthread_create, etc) you are really missing out.
 Enjoy!
 
 Thanassis Tsiodras, Dr.-Ing.
+
 ttsiodras_at-no-spam_thanks-gmail_dot-com

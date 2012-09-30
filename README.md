@@ -254,19 +254,19 @@ and easily achieve portable multithreading.
 When I say portable, I mean it: "./configure && make" is enough
 to create:
 
-1. OpenMP binaries for...
+- OpenMP binaries for...
 
     - Windows (via TDM/MinGW GCC 4.3.2)
     - Debian Linux Etch (both 32 and 64bit, via manually-built GCC 4.3.2)
     - Debian Linux Etch 32bit (via Intel's 10.1.017 compiler)
 
-2. TBB binaries ("./configure --disable-openmp --enable-tbb") for...
+- TBB binaries ("./configure --disable-openmp --enable-tbb") for...
 
     - Debian Linux Etch (both 32 and 64bit, via manually-built GCC 4.3.2)
     - Debian Linux Etch 32bit (via Intel's 10.1.017 compiler)
     - FreeBSD/64
 
-3. Single-threaded binaries for...
+- Single-threaded binaries for...
 
     - Poor OpenBSD/64: it doesn't have real, SMP threads. Not yet, at least.
       It only has user-space ones (as Linux did at some point). But it does

@@ -2,7 +2,7 @@ DISTCLEANFILES = *~ *.~*
 
 SUBDIRS = @subdirs@ src
 
-EXTRA_DIST = README.md COPYING INSTALL AUTHORS NEWS ChangeLog \
+EXTRA_DIST = README.md README COPYING INSTALL AUTHORS NEWS ChangeLog \
     contrib/build.using.IntelCC.and.OpenMP \
     contrib/build.using.IntelCC.and.TBB	contrib/README \
     contrib/createHelpTexture.sh contrib/keys.txt \

@@ -113,7 +113,7 @@ fi
 
 if test x"${HAVE_OPENMP}" = xyes ; then
     AC_MSG_CHECKING(for GCC maturity in OpenMP support)
-    AC_RUN_IFELSE([#include <stdlib.h>
+    AC_RUN_IFELSE([AC_LANG_SOURCE([#include <stdlib.h>
 int main(void) {
 #if defined(__GNUC__)
 #if __GNUC__ < 4 || ((__GNUC__ == 4) && (__GNUC_MINOR__ < 3))
@@ -122,7 +122,7 @@ int main(void) {
 #endif
     return 0;
 }
-    ], [GOODGCC=yes], [GOODGCC=no])
+    ])], [GOODGCC=yes], [GOODGCC=no])
     if test x"${GOODGCC}" = xyes ; then
 	AC_MSG_RESULT($GOODGCC)
 	AC_DEFINE([USE_OPENMP], 1, [Define this to use OpenMP.])
@@ -212,39 +212,39 @@ else
 	# SIMD detection - core logic from mplayer
 
 	AC_MSG_CHECKING(for SSE)
-	AC_RUN_IFELSE([#include <stdlib.h>
+	AC_RUN_IFELSE([AC_LANG_SOURCE([#include <stdlib.h>
 #include <signal.h>
 void catchme(int) { exit(1); }
 int main(void) {
 signal(SIGILL, catchme);
 __asm__ volatile ("xorps %%xmm0, %%xmm0":::"memory"); return 0;
 }
-	], [HAVESSE=yes], [HAVESSE=no])
+	])], [HAVESSE=yes], [HAVESSE=no])
 	AC_MSG_RESULT($HAVESSE)
 	if test x"${HAVESSE}" = xyes ; then
 	    AC_DEFINE([SIMD_SSE], 1, [Define this to use SSE intrinsics.])
 	fi
 
 	AC_MSG_CHECKING(for SSE2)
-	AC_RUN_IFELSE([#include <stdlib.h>
+	AC_RUN_IFELSE([AC_LANG_SOURCE([#include <stdlib.h>
 #include <signal.h>
 void catchme(int) { exit(1); }
 int main(void) {
 signal(SIGILL, catchme);
 __asm__ volatile ("xorpd %%xmm0, %%xmm0":::"memory"); return 0;
 }
-	], [HAVESSE2=yes], [HAVESSE2=no])
+	])], [HAVESSE2=yes], [HAVESSE2=no])
 	AC_MSG_RESULT($HAVESSE2)
 
 	AC_MSG_CHECKING(for SSSE3)
-	AC_RUN_IFELSE([#include <stdlib.h>
+	AC_RUN_IFELSE([AC_LANG_SOURCE([#include <stdlib.h>
 #include <signal.h>
 void catchme(int) { exit(1); }
 int main(void) {
 signal(SIGILL, catchme);
 __asm__ volatile ("pabsd %%xmm0, %%xmm0":::"memory"); return 0;
 }
-	], [HAVESSSE3=yes], [HAVESSSE3=no])
+	])], [HAVESSSE3=yes], [HAVESSSE3=no])
 	AC_MSG_RESULT($HAVESSSE3)
 
 	if test x"${HAVESSE}" = xyes ; then

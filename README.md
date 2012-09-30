@@ -1,3 +1,6 @@
+
+![Generated in the renderer's raytracing mode, with reflections and refractions enabled.](http://users.softlab.ntua.gr/~ttsiod/chessRefraction.jpg "Generated in the renderer's raytracing mode, with reflections and refractions enabled.")
+
 *Screenshots, official tarballs, etc available at [main renderer page](http://users.softlab.ntua.gr/~ttsiod/renderer.html)*
 
 ## Introduction

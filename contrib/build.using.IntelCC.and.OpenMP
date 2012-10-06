@@ -7,6 +7,6 @@ echo
 ARCH=ia32
 uname -a | grep amd64 >/dev/null && ARCH=intel64
 echo Setting environment vars for Intel compiler to $ARCH
-. /opt/intel/composer_xe_2011_sp1.10.319/bin/compilervars_arch.sh $ARCH || exit 1
+. /opt/intel/composerxe/bin/compilervars.sh $ARCH || exit 1
 # -ipo is buggy...
 icpc -I ../src/ -I ../lib3ds-1.3.0/ -DHAVE_GETOPT_H -DUSE_LIB3DS -DUSE_OPENMP -D_REENTRANT -I. -I /usr/include/SDL/ -DNDEBUG -pc32 -xHOST -no-prec-div -O3 -openmp -parallel -opt-mem-layout-trans=3 -ansi-alias -o renderer.intel.openmp -lSDL -lpthread   ../src/renderer.cc ../src/Base3d.cc ../src/BVH.cc ../src/Camera.cc ../src/Keyboard.cc ../src/Light.cc ../src/Loader.cc ../src/MLAA.cc ../src/Rasterizers.cc ../src/Raytracer.cc ../src/Screen.cc ../src/Wu.cc -L ../lib3ds-1.3.0/lib3ds/.libs/ -l3ds -Wl,-R../lib3ds-1.3.0/lib3ds/.libs/

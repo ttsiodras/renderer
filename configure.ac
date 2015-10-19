@@ -1,4 +1,4 @@
-AC_INIT([renderer], [2.2z], [ttsiodras@gmail.com])
+AC_INIT([renderer], [2.3a], [ttsiodras@gmail.com])
 
 AC_CONFIG_HEADERS([src/config.h])
 
@@ -235,6 +235,9 @@ __asm__ volatile ("xorpd %%xmm0, %%xmm0":::"memory"); return 0;
 }
 	])], [HAVESSE2=yes], [HAVESSE2=no])
 	AC_MSG_RESULT($HAVESSE2)
+	if test x"${HAVESSE2}" = xyes ; then
+	    AC_DEFINE([SIMD_SSE2], 1, [Define this to use SSE2 intrinsics.])
+	fi
 
 	AC_MSG_CHECKING(for SSSE3)
 	AC_RUN_IFELSE([AC_LANG_SOURCE([#include <stdlib.h>

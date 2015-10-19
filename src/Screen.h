@@ -347,7 +347,7 @@ void DrawPixelBasic(int y, int x, Uint32 color)
 	    Uint32 *bufp;
 
 	    bufp = (Uint32 *)_surface->pixels + y*_surface->pitch/4 + x;
-	    #ifndef SIMD_SSE
+	    #ifndef SIMD_SSE2
 	    *bufp = color;
 	    #else
 	    // There is no reason to do the following write via the CPU cache

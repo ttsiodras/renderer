@@ -700,6 +700,8 @@ build_os
 build_vendor
 build_cpu
 build
+MLAA_ENABLED_FALSE
+MLAA_ENABLED_TRUE
 target_alias
 host_alias
 build_alias
@@ -2374,6 +2376,13 @@ $as_echo "$as_me: ** Intel MLAA antialiasing is disabled! use --enable-mlaa **" 
 $as_echo "$as_me: ** (provided your CPU has SSE2 instructions...            **" >&6;}
     { $as_echo "$as_me:${as_lineno-$LINENO}: ************************************************************" >&5
 $as_echo "$as_me: ************************************************************" >&6;}
+fi
+ if test x"${enable_mlaa}" = xyes; then
+  MLAA_ENABLED_TRUE=
+  MLAA_ENABLED_FALSE='#'
+else
+  MLAA_ENABLED_TRUE='#'
+  MLAA_ENABLED_FALSE=
 fi
 
 
@@ -7104,6 +7113,10 @@ LIBOBJS=$ac_libobjs
 LTLIBOBJS=$ac_ltlibobjs
 
 
+if test -z "${MLAA_ENABLED_TRUE}" && test -z "${MLAA_ENABLED_FALSE}"; then
+  as_fn_error $? "conditional \"MLAA_ENABLED\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking that generated files are newer than configure" >&5
 $as_echo_n "checking that generated files are newer than configure... " >&6; }
    if test -n "$am_sleep_pid"; then

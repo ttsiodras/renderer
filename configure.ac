@@ -35,7 +35,7 @@ else
     AC_MSG_NOTICE([** (provided your CPU has SSE2 instructions...            **])
     AC_MSG_NOTICE([************************************************************])
 fi
-
+AM_CONDITIONAL([MLAA_ENABLED], [test x"${enable_mlaa}" = xyes])
 
 # Detect the canonical host and target build environment
 AC_CANONICAL_HOST

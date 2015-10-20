@@ -8,9 +8,9 @@ common_SRC = \
     OnlineHelpKeys.h BVH.h BVH.cc Loader.cc Raytracer.cc 
     
 renderer_SOURCES = renderer.cc ${common_SRC}
-#if MLAA_ENABLED
+if MLAA_ENABLED
 renderer_SOURCES += MLAA.h MLAA.cc
-#endif
+endif
 
 renderer_CPPFLAGS = @SDL_CFLAGS@ -I$(srcdir)/../lib3ds-1.3.0/
 

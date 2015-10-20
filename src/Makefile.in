@@ -90,6 +90,7 @@ build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
 noinst_PROGRAMS = renderer$(EXEEXT) showShadowMap$(EXEEXT)
+@MLAA_ENABLED_TRUE@am__append_1 = MLAA.h MLAA.cc
 subdir = src
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
@@ -106,13 +107,20 @@ CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 PROGRAMS = $(noinst_PROGRAMS)
+am__renderer_SOURCES_DIST = renderer.cc 3d.h Algebra.h Base3d.h \
+	Camera.h Clock.h Defines.h Exceptions.h Keyboard.h Light.h \
+	Scene.h Screen.h Types.h Camera.cc Keyboard.cc Light.cc \
+	Rasterizers.cc Screen.cc ScanConverter.h Fillers.h \
+	LightingEq.h Base3d.cc Wu.h Wu.cc HelpKeys.h OnlineHelpKeys.h \
+	BVH.h BVH.cc Loader.cc Raytracer.cc MLAA.h MLAA.cc
 am__objects_1 = renderer-Camera.$(OBJEXT) renderer-Keyboard.$(OBJEXT) \
 	renderer-Light.$(OBJEXT) renderer-Rasterizers.$(OBJEXT) \
 	renderer-Screen.$(OBJEXT) renderer-Base3d.$(OBJEXT) \
 	renderer-Wu.$(OBJEXT) renderer-BVH.$(OBJEXT) \
 	renderer-Loader.$(OBJEXT) renderer-Raytracer.$(OBJEXT)
+@MLAA_ENABLED_TRUE@am__objects_2 = renderer-MLAA.$(OBJEXT)
 am_renderer_OBJECTS = renderer-renderer.$(OBJEXT) $(am__objects_1) \
-	renderer-MLAA.$(OBJEXT)
+	$(am__objects_2)
 renderer_OBJECTS = $(am_renderer_OBJECTS)
 renderer_DEPENDENCIES = ../lib3ds-1.3.0/lib3ds/.libs/lib3ds.a
 am_showShadowMap_OBJECTS = showShadowMap-showShadowMap.$(OBJEXT) \
@@ -165,7 +173,7 @@ am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(renderer_SOURCES) $(showShadowMap_SOURCES)
-DIST_SOURCES = $(renderer_SOURCES) $(showShadowMap_SOURCES)
+DIST_SOURCES = $(am__renderer_SOURCES_DIST) $(showShadowMap_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -313,9 +321,7 @@ common_SRC = \
     Fillers.h LightingEq.h Base3d.cc Wu.h Wu.cc HelpKeys.h \
     OnlineHelpKeys.h BVH.h BVH.cc Loader.cc Raytracer.cc 
 
-#if MLAA_ENABLED
-renderer_SOURCES = renderer.cc ${common_SRC} MLAA.h MLAA.cc
-#endif
+renderer_SOURCES = renderer.cc ${common_SRC} $(am__append_1)
 renderer_CPPFLAGS = @SDL_CFLAGS@ -I$(srcdir)/../lib3ds-1.3.0/
 renderer_LDADD = @SDL_LIBS@ @TBB_LIBS@ @OPENMP_LIBS@ ../lib3ds-1.3.0/lib3ds/.libs/lib3ds.a @MINGWSTACK@ @WHOLEPROGRAM@
 showShadowMap_SOURCES = showShadowMap.cc Keyboard.h Keyboard.cc

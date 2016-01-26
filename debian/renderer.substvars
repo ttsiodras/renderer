@@ -1,0 +1,3 @@
+misc:Pre-Depends=multiarch-support
+shlibs:Depends=libc6 (>= 2.15), libc6 (>= 2.3.6-6~), libgcc1 (>= 1:4.1.1), libgomp1 (>= 4.9), libsdl1.2debian (>= 1.2.11), libstdc++6 (>= 4.6), renderer
+misc:Depends=

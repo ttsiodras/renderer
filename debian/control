@@ -1,0 +1,14 @@
+Source: renderer
+Maintainer: Thanassis Tsiodras <ttsiodras@gmail.com>
+Section: misc
+Priority: optional
+Standards-Version: 3.9.2
+Build-Depends: debhelper (>= 9), libsdl1.2-dev (>= 1.2)
+
+Package: renderer
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Software renderer of 3D meshes
+ Portable software-only renderer that can
+ render 3D objects in multiple rendering
+ modes.

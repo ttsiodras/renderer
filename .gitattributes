@@ -1,1 +1,3 @@
-lib3ds-1.3.0/* linguist-vendored
+VisualC/**/* linguist-vendored
+lib3ds-1.3.0/**/* linguist-vendored
+src/*.[ch] linguist-language=C++

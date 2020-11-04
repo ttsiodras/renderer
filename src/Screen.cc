@@ -32,14 +32,23 @@ Screen::DrawPixelFun Screen::DrawPixel = NULL;
 
 template<>
 void Screen::Plot(
-    int y, int x, const FatPointAmbient& v, const TriangleCarrier<FatPointAmbient>&, const Camera&)
+    int y, int x, const FatPointAmbient& v, const TriangleCarrier<FatPointAmbient>& tri, const Camera&)
 {
     // Normal ambient lighting: the per-pixel interpolated color is the
     // ambient occlusion factor times the triangle color (FillerAmbient)
-    DrawPixel(y,x,SDL_MapRGB(_surface->format,
-		(unsigned char)v._color._r,
-		(unsigned char)v._color._g,
-		(unsigned char)v._color._b));
+    if (tri._pMesh->_isSelectedViaMouse) {
+        unsigned char r =  (unsigned char)v._color._r;
+        unsigned char g =  (unsigned char)v._color._g;
+        unsigned char b =  (unsigned char)v._color._b;
+        r = 0x80 + (r >> 1);
+        g = 0x80 + (g >> 1);
+        b = 0x80 + (b >> 1);
+        DrawPixel(y,x,SDL_MapRGB(_surface->format, r, g, b));
+    } else
+        DrawPixel(y,x,SDL_MapRGB(_surface->format,
+                    (unsigned char)v._color._r,
+                    (unsigned char)v._color._g,
+                    (unsigned char)v._color._b));
 }
 
 template<>
@@ -56,7 +65,6 @@ void Screen::Plot(
         g = 0x80 + (g >> 1);
         b = 0x80 + (b >> 1);
         DrawPixel(y,x,SDL_MapRGB(_surface->format, r, g, b));
-        // DrawPixel(y,x,SDL_MapRGB(_surface->format, 0xFF, 0xFF, 0xFF));
     } else
         DrawPixel(y,x,SDL_MapRGB(_surface->format,
                     (unsigned char)v._color._r,

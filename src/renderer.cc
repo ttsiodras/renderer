@@ -507,6 +507,16 @@ int main(int argc, char *argv[])
 		    pLight2->CalculateXformFromCameraToLightSpace(sony);
 	    }
 
+	    keys.poll();
+            if (keys._isMouseBtnPressed) {
+                if (selectedMesh)
+                    selectedMesh->_isSelectedViaMouse = false;
+                selectedMesh = canvas._meshBuffer[ keys._mouse_Y ][ keys._mouse_X ];
+                if (selectedMesh)
+                    selectedMesh->_isSelectedViaMouse = true;
+                forceRedraw = true;
+            }
+
 	    // Avoid redrawing if possible (saving CPU utilization)
 	    if (oldLightPosition != Vector3(*pLight) ||
 		oldEyePosition != eye ||
@@ -585,15 +595,6 @@ int main(int argc, char *argv[])
 		framesDrawn++;
 		msSpentDrawing += frameRenderTime.readMS();
 	    } // end of if position/light/lookat changed
-
-	    keys.poll();
-            if (keys._isMouseBtnPressed) {
-                if (selectedMesh)
-                    selectedMesh->_isSelectedViaMouse = false;
-                selectedMesh = canvas._meshBuffer[ keys._mouse_Y ][ keys._mouse_X ];
-                if (selectedMesh)
-                    selectedMesh->_isSelectedViaMouse = true;
-            }
 
 	    // The more frames per sec, the smaller the dAngle should be
 	    // The less frames per sec, the larger  the dAngle should be

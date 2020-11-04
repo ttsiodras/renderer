@@ -47,6 +47,12 @@ struct Vector3
 	: 
 	_x(rhs._x), _y(rhs._y), _z(rhs._z) {}
 
+    Vector3& operator=(const Vector3& rhs) {
+        _x = rhs._x;
+        _y = rhs._y;
+        _z = rhs._z;
+        return *this;
+    }
 /* An abandoned experiment with intrinsics
  * (GCC proved to do just as good a job in optimizing with SSE)
 

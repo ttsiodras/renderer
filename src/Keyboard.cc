@@ -116,4 +116,7 @@ void Keyboard::poll(bool bYield)
             break;
         } // switch(event.type)
     } // if (SDL_PollEvent(...))
+
+    Uint8 btn = SDL_GetMouseState (&_mouse_X, &_mouse_Y);
+    _isMouseBtnPressed = 0 != ((btn & SDL_BUTTON(SDL_BUTTON_LEFT)) | (btn & SDL_BUTTON(SDL_BUTTON_RIGHT)));
 }

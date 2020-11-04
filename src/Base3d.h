@@ -24,6 +24,11 @@
 
 #include "Types.h"
 
+struct Mesh {
+    bool _isSelectedViaMouse;
+    Mesh(): _isSelectedViaMouse(false) {}
+};
+
 struct Vertex : public Vector3
 {
     Vector3 _normal;
@@ -57,11 +62,16 @@ struct Triangle
     Vector3 _bottom;
     Vector3 _top;
 
+    // Which mesh do we belong to?
+    // (to allow selection via mouse)
+    Mesh *_pMesh;
+
     Triangle(
 	const Vertex *vertexA,
 	const Vertex *vertexB,
 	const Vertex *vertexC,
 	unsigned r, unsigned g, unsigned b,
+        Mesh *pMesh,
 	bool twosided = false, bool triNormalProvided=false, Vector3 triNormal=Vector3(0.,0.,0.) );
 };
 

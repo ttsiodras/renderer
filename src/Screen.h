@@ -50,6 +50,7 @@ struct Screen
 {
     static SDL_Surface *_surface;
     coord _Zbuffer[HEIGHT][WIDTH];
+    Mesh* _meshBuffer[HEIGHT][WIDTH];
     const struct Scene& _scene;
     typedef void (*DrawPixelFun)(int y, int x, Uint32 color);
     static DrawPixelFun DrawPixel;
@@ -125,6 +126,7 @@ struct Screen
 
     void ClearZbuffer() {
 	memset(reinterpret_cast<void*>(&_Zbuffer[0][0]), 0x0, sizeof(_Zbuffer));
+	memset(reinterpret_cast<void*>(&_meshBuffer[0][0]), 0x0, sizeof(_meshBuffer));
     }
 
     void ShowScreen(bool raytracerOutput=false, bool doMLAA=true) 
@@ -209,6 +211,7 @@ struct Screen
 	if (_Zbuffer[y][x] < v._z) {
 	    // then update the Z-Buffer
 	    _Zbuffer[y][x] = v._z;
+            _meshBuffer[y][x] = tri._pMesh;
 	    // ...and Plot it.
 	    Plot(y, x, v, tri, camera);
 	}

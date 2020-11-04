@@ -44,14 +44,24 @@ void Screen::Plot(
 
 template<>
 void Screen::Plot(
-    int y, int x, const FatPointGouraud& v, const TriangleCarrier<FatPointGouraud>&, const Camera&)
+    int y, int x, const FatPointGouraud& v, const TriangleCarrier<FatPointGouraud>& tri, const Camera&)
 {
     // Complete lighting equation (ambient + specular + diffuse) done in FillerGouraud.
     // Color is then interpolated per-pixel:
-    DrawPixel(y,x,SDL_MapRGB(_surface->format,
-		(unsigned char)v._color._r,
-		(unsigned char)v._color._g,
-		(unsigned char)v._color._b));
+    if (tri._pMesh->_isSelectedViaMouse) {
+        unsigned char r =  (unsigned char)v._color._r;
+        unsigned char g =  (unsigned char)v._color._g;
+        unsigned char b =  (unsigned char)v._color._b;
+        r = 0x80 + (r >> 1);
+        g = 0x80 + (g >> 1);
+        b = 0x80 + (b >> 1);
+        DrawPixel(y,x,SDL_MapRGB(_surface->format, r, g, b));
+        // DrawPixel(y,x,SDL_MapRGB(_surface->format, 0xFF, 0xFF, 0xFF));
+    } else
+        DrawPixel(y,x,SDL_MapRGB(_surface->format,
+                    (unsigned char)v._color._r,
+                    (unsigned char)v._color._g,
+                    (unsigned char)v._color._b));
 }
 
 // Compile-time dictionary<TypeOfPoint,LightingEquationMode>,
@@ -86,7 +96,16 @@ Uint32 IlluminatePixel(
     Pixel color = Pixel(); // Start from complete darkness...
     typename ModeSpecificLighting<InterpolatedType>::ShadowModel compute(_scene);
     compute.ComputePixel( point, normal, tri.color, v._ambientOcclusionCoeff, color);
-    return SDL_MapRGB(_surface->format, (Uint8)color._r, (Uint8)color._g, (Uint8)color._b);
+    if (tri._pMesh->_isSelectedViaMouse) {
+        unsigned char r =  (unsigned char)color._r;
+        unsigned char g =  (unsigned char)color._g;
+        unsigned char b =  (unsigned char)color._b;
+        r = 0x80 + (r >> 1);
+        g = 0x80 + (g >> 1);
+        b = 0x80 + (b >> 1);
+        return SDL_MapRGB(_surface->format, r, g, b);
+    } else
+        return SDL_MapRGB(_surface->format, (Uint8)color._r, (Uint8)color._g, (Uint8)color._b);
 }
 
 template<>

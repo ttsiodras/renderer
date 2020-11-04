@@ -85,8 +85,8 @@ void Scene::load(const char *filename)
         _vertices.push_back(Vertex(-0.5,  0.5, 0.,  0.,0.,1.));
         _vertices.push_back(Vertex(-0.5, -0.5, 0.,  0.,0.,1.));
         _triangles.reserve(2);
-        _triangles.push_back(Triangle(&_vertices[0], &_vertices[1], &_vertices[2], 255,0,0));
-        _triangles.push_back(Triangle(&_vertices[0], &_vertices[2], &_vertices[3], 255,0,0));
+        _triangles.push_back(Triangle(&_vertices[0], &_vertices[1], &_vertices[2], 255,0,0, _catchallMesh));
+        _triangles.push_back(Triangle(&_vertices[0], &_vertices[2], &_vertices[3], 255,0,0, _catchallMesh));
         return;
 
     }
@@ -203,7 +203,7 @@ void Scene::load(const char *filename)
                     _triangles.push_back(
                         Triangle(
                             &_vertices[idx1], &_vertices[idx2], &_vertices[idx3],
-                            unsigned(r),unsigned(g),unsigned(b)));
+                            unsigned(r),unsigned(g),unsigned(b), _catchallMesh));
                 }
 
                 totalPoints += noOfPoints;
@@ -262,7 +262,7 @@ void Scene::load(const char *filename)
                 _triangles.push_back(
                     Triangle(
                         &_vertices[idx1], &_vertices[idx2], &_vertices[idx3],
-                        unsigned(r),unsigned(g),unsigned(b)));
+                        unsigned(r),unsigned(g),unsigned(b), _catchallMesh));
             }
             fclose(fp);
             fix_normals();
@@ -299,6 +299,7 @@ void Scene::load(const char *filename)
             pMesh = p3DS->meshes;
             int currentTotalPoints = 0;
             while(pMesh) {
+                Mesh *p_tmpMesh = new Mesh();
                 if (!pMesh->pointL) { pMesh=pMesh->next; continue; }
                 if (!pMesh->faceL)  { pMesh=pMesh->next; continue; }
                 for(i=0; i<(int)pMesh->faces; i++) {
@@ -334,6 +335,7 @@ void Scene::load(const char *filename)
                             &_vertices[currentTotalPoints + 3*i + 1],
                             &_vertices[currentTotalPoints + 3*i + 2],
                             r, g, b,
+                            p_tmpMesh,
                             pMat->second._twoSided,
                             true,
                             Vector3(pMesh->faceL[i].normal[0],
@@ -393,7 +395,7 @@ void Scene::load(const char *filename)
                             _triangles.push_back(
                                 Triangle(
                                     &_vertices[idx1], &_vertices[idx2], &_vertices[idx3],
-                                    r, g, b));
+                                    r, g, b, _catchallMesh));
                         }
                     }
                 }

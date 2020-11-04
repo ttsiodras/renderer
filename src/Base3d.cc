@@ -29,6 +29,7 @@ Triangle::Triangle(
     const Vertex *vertexB,
     const Vertex *vertexC,
     unsigned r, unsigned g, unsigned b,
+    Mesh *pMesh,
     bool twosided, bool triNormalProvided, Vector3 triNormal)
     :
     _vertexA(vertexA), _vertexB(vertexB), _vertexC(vertexC),
@@ -41,7 +42,8 @@ Triangle::Triangle(
     _color(SDL_MapRGB(Screen::_surface->format, r,g,b)), // For use with DrawPixel
     _twoSided(twosided),
     _bottom(FLT_MAX,FLT_MAX,FLT_MAX), // Will be updated after centering in Loader
-    _top(-FLT_MAX,-FLT_MAX,-FLT_MAX) // Will be updated after centering in Loader
+    _top(-FLT_MAX,-FLT_MAX,-FLT_MAX), // Will be updated after centering in Loader
+    _pMesh(pMesh)
 {
     if (!triNormalProvided) {
 	_normal = Vector3(

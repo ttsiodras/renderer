@@ -150,9 +150,16 @@ struct FatPointPhongAndSoftShadowed : FatPointPhongAndShadowed {
 // Before defining it, though, we want to only carry the triangle color
 // for the Phong modes - not the Ambient and Gouraud ones.
 
-template<class T> struct CarryTriangleColor { Pixel color; };
-template<> struct CarryTriangleColor<FatPointAmbient> {};
-template<> struct CarryTriangleColor<FatPointGouraud> {};
+template<class T> struct CarryTriangleColor {
+    Mesh *_pMesh;
+    Pixel color;
+};
+template<> struct CarryTriangleColor<FatPointAmbient> {
+    Mesh *_pMesh;
+};
+template<> struct CarryTriangleColor<FatPointGouraud> {
+    Mesh *_pMesh;
+};
 
 // Now that we have CarryTriangleColor, we can define TriangleCarrier:
 template <typename InterpolatedType>
@@ -181,6 +188,8 @@ void inline Filler(
     const Vector3& inCameraSpaceA, const Vector3& inCameraSpaceB, const Vector3& inCameraSpaceC,
     const Triangle& triangle, const Camera&, TriangleCarrier<FatPointAmbient>& tri)
 {
+    tri._pMesh = triangle._pMesh;
+
 #define COMMON_VERTEX(l, L)										\
     tri. l ## y = (int) l ## y;										\
     tri.xformed ## L ._projx = (coord) l ## x;								\
@@ -206,6 +215,8 @@ void inline Filler(
     const Vector3& inCameraSpaceA, const Vector3& inCameraSpaceB, const Vector3& inCameraSpaceC,
     const Triangle& triangle, const Camera& camera, TriangleCarrier<FatPointGouraud>& tri)
 {
+    tri._pMesh = triangle._pMesh;
+
     // No shadow checking
     LightingEquation<NoShadows> compute(scene);
 
@@ -234,6 +245,8 @@ void PhongSetup(TriangleCarrier& tri, const Triangle& triangle, const Camera& ey
     const coord& ax, const coord& ay, const coord& bx, const coord& by, const coord& cx, const coord& cy,
     const Vector3& inCameraSpaceA, const Vector3& inCameraSpaceB, const Vector3& inCameraSpaceC)
 {
+    tri._pMesh = triangle._pMesh;
+
 #define PHONG_VERTEX(l, L)								    \
     COMMON_VERTEX(l, L)									    \
     tri.xformed ## L._x = inCameraSpace ## L._x/inCameraSpace ## L._z;			    \
@@ -266,6 +279,8 @@ void inline Filler(
     const Vector3& inCameraSpaceA, const Vector3& inCameraSpaceB, const Vector3& inCameraSpaceC,
     const Triangle& triangle, const Camera& eye, TriangleCarrier<FatPointPhong>& tri)
 {
+    tri._pMesh = triangle._pMesh;
+
     // Common setup for all 3 Phong modes (Phong, PhongShadowed, PhongSoftShadowed)
     PhongSetup(tri,triangle,eye,ax,ay,bx,by,cx,cy,inCameraSpaceA,inCameraSpaceB,inCameraSpaceC);
 }
@@ -281,6 +296,8 @@ void inline Filler(
     const Vector3& inCameraSpaceA, const Vector3& inCameraSpaceB, const Vector3& inCameraSpaceC,
     const Triangle& triangle, const Camera& eye, TriangleCarrier<FatPointPhongAndShadowed>& tri)
 {
+    tri._pMesh = triangle._pMesh;
+
     // Same setup data as Phong (the difference is in how Plot<FatPointPhongAndShadowed> works)
     PhongSetup(tri,triangle,eye,ax,ay,bx,by,cx,cy,inCameraSpaceA,inCameraSpaceB,inCameraSpaceC);
 }
@@ -296,6 +313,8 @@ void inline Filler(
     const Vector3& inCameraSpaceA, const Vector3& inCameraSpaceB, const Vector3& inCameraSpaceC,
     const Triangle& triangle, const Camera& eye, TriangleCarrier<FatPointPhongAndSoftShadowed>& tri)
 {
+    tri._pMesh = triangle._pMesh;
+
     // Same setup data as Phong (the difference is in how Plot<FatPointPhongAndSoftShadowed> works)
     PhongSetup(tri,triangle,eye,ax,ay,bx,by,cx,cy,inCameraSpaceA,inCameraSpaceB,inCameraSpaceC);
 }

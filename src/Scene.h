@@ -46,13 +46,18 @@ struct Scene {
     unsigned _pCFBVH_No;
     CacheFriendlyBVHNode *_pCFBVH;
 
+    // The "catchall" mesh - were we assign anything that doesn't
+    // have its own mesh to belong to.
+    Mesh *_catchallMesh;
+
     Scene()
 	:
 	_pSceneBVH(NULL),
 	_triIndexListNo(0),
 	_triIndexList(NULL),
 	_pCFBVH_No(0),
-	_pCFBVH(NULL)
+	_pCFBVH(NULL),
+        _catchallMesh(new Mesh())
 	{}
 
     // Load object

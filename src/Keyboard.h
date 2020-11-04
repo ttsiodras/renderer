@@ -29,6 +29,9 @@ struct Keyboard {
     Uint32 _isS, _isD, _isE, _isF, _isR, _isH;
     Uint32 _is0, _is1, _is2, _is3, _is4, _is5, _is6, _is7, _is8, _is9;
 
+    bool _isMouseBtnPressed;
+    int _mouse_X, _mouse_Y;
+
     Keyboard();
     ~Keyboard();
 

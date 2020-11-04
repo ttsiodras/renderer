@@ -335,6 +335,7 @@ int main(int argc, char *argv[])
 	    oldLightPosition(1e10,1e10,1e10);
 	bool forceRedraw = false;
 
+        Mesh *selectedMesh = NULL;
 	while(!keys._isAbort) {
 	    if (doBenchmark && framesDrawn==benchmarkFrames)
 		break;
@@ -584,7 +585,15 @@ int main(int argc, char *argv[])
 		framesDrawn++;
 		msSpentDrawing += frameRenderTime.readMS();
 	    } // end of if position/light/lookat changed
+
 	    keys.poll();
+            if (keys._isMouseBtnPressed) {
+                if (selectedMesh)
+                    selectedMesh->_isSelectedViaMouse = false;
+                selectedMesh = canvas._meshBuffer[ keys._mouse_Y ][ keys._mouse_X ];
+                if (selectedMesh)
+                    selectedMesh->_isSelectedViaMouse = true;
+            }
 
 	    // The more frames per sec, the smaller the dAngle should be
 	    // The less frames per sec, the larger  the dAngle should be

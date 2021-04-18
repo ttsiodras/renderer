@@ -1,4 +1,4 @@
-AC_INIT([renderer], [2.3a], [ttsiodras@gmail.com])
+AC_INIT([renderer], [2.3c], [ttsiodras@gmail.com])
 
 AC_CONFIG_HEADERS([src/config.h])
 

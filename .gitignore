@@ -85,3 +85,4 @@ src/renderer-Rasterizers.o
 src/renderer-Raytracer.o
 src/renderer-MLAA.o
 contrib/bits
+configure.lineno

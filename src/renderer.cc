@@ -59,7 +59,7 @@
 using std::cerr;
 using std::cout;
 using std::endl;
-using std::auto_ptr;
+using std::unique_ptr;
 using std::min;
 using std::max;
 using std::string;
@@ -274,7 +274,7 @@ int main(int argc, char *argv[])
 	const coord EyeDistanceFactor = 4.0;
 
 	// Add the light that is rotated with the Q/W keys.
-	auto_ptr<Light> pLight(
+	unique_ptr<Light> pLight(
 	    new Light(
 		LightDistanceFactor*maxi,
 		LightDistanceFactor*maxi,
@@ -285,7 +285,7 @@ int main(int argc, char *argv[])
 	pLight->ClearShadowBuffer();
 
 	// Optionally, add a second, static light.
-	auto_ptr<Light> pLight2(
+	unique_ptr<Light> pLight2(
 	    new Light(
 		LightDistanceFactor*maxi,
 		-LightDistanceFactor*maxi,

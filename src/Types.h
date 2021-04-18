@@ -56,6 +56,8 @@ struct Vector3
 	_mm_storeu_ps(&_x, _mm_mul_ps(tmp, _mm_rsqrt_ps(_mm_add_ps(l, _mm_shuffle_ps(l, l, 0x11)))));
 
  */
+    Vector3& operator=(const Vector3& rhs) = default;
+
     inline coord length()
     {
 	return sqrt(_x*_x +_y*_y + _z*_z);

@@ -810,7 +810,7 @@ lib3ds_file_read(Lib3dsFile *file, Lib3dsIo *io)
 
 
 static Lib3dsBool
-colorf_write(Lib3dsRgba rgb, Lib3dsIo *io)
+colorf_write(Lib3dsRgb rgb, Lib3dsIo *io)
 {
   Lib3dsChunk c;
 

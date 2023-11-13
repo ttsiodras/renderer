@@ -164,7 +164,7 @@ lib3ds_background_read(Lib3dsBackground *background, Lib3dsIo *io)
 
 
 static Lib3dsBool
-colorf_write(Lib3dsRgba rgb, Lib3dsIo *io)
+colorf_write(Lib3dsRgb rgb, Lib3dsIo *io)
 {
   Lib3dsChunk c;
 
@@ -182,7 +182,7 @@ colorf_write(Lib3dsRgba rgb, Lib3dsIo *io)
 
 
 static Lib3dsBool
-colorf_defined(Lib3dsRgba rgb)
+colorf_defined(Lib3dsRgb rgb)
 {
   int i;
   for (i=0; i<3; ++i) {

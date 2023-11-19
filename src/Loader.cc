@@ -76,6 +76,12 @@ struct MaterialColors {
 
 const coord Scene::MaxCoordAfterRescale = 1.2f;
 
+#define SAFE_FREAD(a, b, c, d) do { \
+  if (c != fread(a, b, c, d)) {     \
+    THROW("Malformed 3D file");     \
+  }                                 \
+} while(0)
+
 void Scene::load(const char *filename)
 {
     if (filename[0] == '@' && filename[1] == 'p') {     // Platform
@@ -119,28 +125,29 @@ void Scene::load(const char *filename)
             Uint32 totalPoints = 0, totalTris = 0;
             Uint32 magic;
 
-            fread(&magic, 1, sizeof(Uint32), fp);
+            SAFE_FREAD(&magic, 1, sizeof(Uint32), fp);
             if (magic != TRI_MAGIC && magic != TRI_MAGICNORMAL) {
                 // No magic, just vertices and points (no normals, no colors)
-                fseek(fp, 0, SEEK_SET);
+                (void)fseek(fp, 0, SEEK_SET);
             }
 
             // Calculate total number of vertices in order to reserve the vectors memory
             unsigned currentOffset = ftell(fp);
+            ASSERT_OR_DIE(currentOffset != (unsigned) - 1);
             unsigned currentTotalPoints = 0;
             unsigned currentTotalTris = 0;
             while(1) {
                 unsigned temp;
-                fread(&temp, 1, sizeof(Uint32), fp);
+                (void) fread(&temp, 1, sizeof(Uint32), fp);
                 if (feof(fp))
                     break;
                 currentTotalPoints += temp;
-                fseek(fp, temp*(magic==TRI_MAGICNORMAL?24:12), SEEK_CUR);
-                fread(&temp, 1, sizeof(Uint32), fp);
+                (void) fseek(fp, temp*(magic==TRI_MAGICNORMAL?24:12), SEEK_CUR);
+                SAFE_FREAD(&temp, 1, sizeof(Uint32), fp);
                 if (feof(fp))
                     break;
                 currentTotalTris += temp;
-                fseek(fp, temp*24, SEEK_CUR);
+                (void) fseek(fp, temp*24, SEEK_CUR);
             }
 
             // Reserve the space, now that you know
@@ -152,24 +159,24 @@ void Scene::load(const char *filename)
             _triangles.reserve(currentTotalTris);
 
             // Now load them inside the std::vectors...
-            fseek(fp, currentOffset, SEEK_SET);
+            (void) fseek(fp, currentOffset, SEEK_SET);
             do {
                 Uint32 noOfPoints;
-                fread(&noOfPoints, 1, sizeof(Uint32), fp);
+                (void) fread(&noOfPoints, 1, sizeof(Uint32), fp);
                 if (feof(fp))
                     break;
 
                 for(Uint32 i=0; i<noOfPoints; i++) {
                     float x,y,z;
-                    fread(&x,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
-                    fread(&y,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
-                    fread(&z,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
+                    SAFE_FREAD(&x,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
+                    SAFE_FREAD(&y,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
+                    SAFE_FREAD(&z,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
 
                     float nx=0.,ny=0.,nz=0.;
                     if (magic == TRI_MAGICNORMAL) {
-                        fread(&nx,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
-                        fread(&ny,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
-                        fread(&nz,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
+                      SAFE_FREAD(&nx,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
+                      SAFE_FREAD(&ny,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
+                      SAFE_FREAD(&nz,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
                     } else {
                         nx = ny = nz = 0; // Will be calculated in fix_normals()
                     }
@@ -178,23 +185,23 @@ void Scene::load(const char *filename)
                 }
 
                 Uint32 noOfTris;
-                fread(&noOfTris, 1, sizeof(Uint32), fp);
+                SAFE_FREAD(&noOfTris, 1, sizeof(Uint32), fp);
                 if (feof(fp)) { THROW("Malformed 3D file"); }
 
                 for(Uint32 i=0; i<noOfTris; i++) {
                     Uint32 idx1,idx2,idx3;
-                    fread(&idx1,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
-                    fread(&idx2,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
-                    fread(&idx3,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
+                    SAFE_FREAD(&idx1,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
+                    SAFE_FREAD(&idx2,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
+                    SAFE_FREAD(&idx3,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
                     if (idx1>=(totalPoints+noOfPoints)) { THROW("Malformed 3D file (idx1)"); }
                     if (idx2>=(totalPoints+noOfPoints)) { THROW("Malformed 3D file (idx2)"); }
                     if (idx3>=(totalPoints+noOfPoints)) { THROW("Malformed 3D file (idx3)"); }
 
                     float r,g,b;
                     if (magic == TRI_MAGIC || magic == TRI_MAGICNORMAL) {
-                        fread(&r,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
-                        fread(&g,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
-                        fread(&b,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
+                      SAFE_FREAD(&r,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
+                      SAFE_FREAD(&g,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
+                      SAFE_FREAD(&b,1,4,fp); if (feof(fp)) { THROW("Malformed 3D file"); }
                         r*=255.; g*=255.; b*=255.;
                     } else {
                         r = g = b = 255.0; // No colors? White, then... :-(
@@ -222,10 +229,10 @@ void Scene::load(const char *filename)
 
             Uint32 totalPoints = 0, totalTriangles = 0;
 
-            fseek(fp, 0, SEEK_END);
+            (void) fseek(fp, 0, SEEK_END);
             totalTriangles = ftell(fp)/36;
             totalPoints = 3*totalTriangles;
-            fseek(fp, 0, SEEK_SET);
+            (void) fseek(fp, 0, SEEK_SET);
 
             _vertices.reserve(totalPoints);
             _triangles.reserve(totalTriangles);
@@ -233,9 +240,9 @@ void Scene::load(const char *filename)
             // Now load them inside the std::vectors...
             for(Uint32 i=0; i<totalPoints; i++) {
                 float x,y,z;
-                fread(&y,1,4,fp); if (feof(fp)) { fclose(fp); THROW("Malformed 3D file"); }
-                fread(&z,1,4,fp); if (feof(fp)) { fclose(fp); THROW("Malformed 3D file"); }
-                fread(&x,1,4,fp); if (feof(fp)) { fclose(fp); THROW("Malformed 3D file"); }
+                SAFE_FREAD(&y,1,4,fp); if (feof(fp)) { fclose(fp); THROW("Malformed 3D file"); }
+                SAFE_FREAD(&z,1,4,fp); if (feof(fp)) { fclose(fp); THROW("Malformed 3D file"); }
+                SAFE_FREAD(&x,1,4,fp); if (feof(fp)) { fclose(fp); THROW("Malformed 3D file"); }
 
                 float nx=0.,ny=0.,nz=0.;
                 assert(_vertices.size() < _vertices.capacity());
@@ -343,6 +350,7 @@ void Scene::load(const char *filename)
                 currentTotalPoints += 3*pMesh->faces;
                 pMesh = pMesh->next;
             }
+            free(p3DS);
         } else if (!strcmp(dt, "PLY") || !strcmp(dt, "ply")) {
             // Only shadevis generated objects, not full blown parser!
             std::ifstream file(filename, std::ios::in);

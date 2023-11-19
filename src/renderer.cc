@@ -244,7 +244,7 @@ int main(int argc, char *argv[])
 	bool autoRotate = true;
 
 	Scene scene;
-	Screen canvas(scene);
+	static Screen canvas(scene);
 
 	coord angle1=0.0f;
 	coord angle2=0.0f*M_PI/180.f;

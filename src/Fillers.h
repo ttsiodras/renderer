@@ -20,7 +20,6 @@
 #ifndef __FILLERS_H__
 #define __FILLERS_H__
 
-#include "3d.h"
 #include "Screen.h"
 #include "LightingEq.h"
 

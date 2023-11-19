@@ -653,7 +653,7 @@ static int hlineColor(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 
 	int dx;
 	int pixx, pixy;
 	Sint16 xtmp;
-	int result = -1;
+	int result;
 	Uint8 *colorptr;
 	Uint8 color3[3];
 
@@ -804,7 +804,7 @@ static int vlineColor(SDL_Surface * dst, Sint16 x, Sint16 y1, Sint16 y2, Uint32 
 	int pixx, pixy;
 	Sint16 h;
 	Sint16 ytmp;
-	int result = -1;
+	int result;
 	Uint8 *colorptr;
 
 	/*

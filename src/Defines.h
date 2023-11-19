@@ -37,4 +37,11 @@
 
 #define TRIANGLES_PER_THREAD  50
 
+#define ASSERT_OR_DIE(x) do {                \
+    if (!(x)) {                              \
+        fprintf(stderr, "Internal error\n"); \
+        exit(1);                             \
+    }                                        \
+} while(0)
+
 #endif

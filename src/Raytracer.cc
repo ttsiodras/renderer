@@ -19,6 +19,7 @@
 
 #include <config.h>
 
+#include <cstddef>
 #include <vector>
 #include <sstream>
 #include <cfloat>
@@ -126,20 +127,20 @@ inline bool RayIntersectsBox(const Vector3& originInWorldSpace, const Vector3& r
     Tnear = -FLT_MAX;
     Tfar = FLT_MAX;
 
-#define CHECK_NEAR_AND_FAR_INTERSECTION(c)										    \
-    if (rayInWorldSpace._ ## c == 0.) {								    \
-	if (originInWorldSpace._##c < box._bottom._##c) return false;				    \
-	if (originInWorldSpace._##c > box._top._##c) return false;				    \
-    } else {											    \
-	coord T1 = (box._bottom._##c - originInWorldSpace._##c)/rayInWorldSpace._##c;		    \
-	coord T2 = (box._top._##c    - originInWorldSpace._##c)/rayInWorldSpace._##c;		    \
-	if (T1>T2) { coord tmp=T1; T1=T2; T2=tmp; }						    \
-	if (T1 > Tnear) Tnear = T1;								    \
-	if (T2 < Tfar)  Tfar = T2;								    \
-	if (Tnear > Tfar)									    \
-	    return false;									    \
-	if (Tfar < 0.)										    \
-	    return false;									    \
+#define CHECK_NEAR_AND_FAR_INTERSECTION(c)                                            \
+    if (rayInWorldSpace._ ## c == 0.) {                                               \
+	if (originInWorldSpace._##c < box._bottom._##c) return false;                 \
+	if (originInWorldSpace._##c > box._top._##c) return false;                    \
+    } else {                                                                          \
+	coord T1 = (box._bottom._##c - originInWorldSpace._##c)/rayInWorldSpace._##c; \
+	coord T2 = (box._top._##c    - originInWorldSpace._##c)/rayInWorldSpace._##c; \
+	if (T1>T2) { coord tmp=T1; T1=T2; T2=tmp; }                                   \
+	if (T1 > Tnear) Tnear = T1;                                                   \
+	if (T2 < Tfar)  Tfar = T2;                                                    \
+	if (Tnear > Tfar)                                                             \
+	    return false;                                                             \
+	if (Tfar < 0.)                                                                \
+	    return false;                                                             \
     }
 
     CHECK_NEAR_AND_FAR_INTERSECTION(x)
@@ -616,6 +617,7 @@ int CountBoxes(BVHNode *root)
 {
     if (!root->IsLeaf()) {
 	BVHInner *p = dynamic_cast<BVHInner*>(root);
+        ASSERT_OR_DIE(p);
 	return 1 + CountBoxes(p->_left) + CountBoxes(p->_right);
     } else
 	return 1;
@@ -625,9 +627,11 @@ unsigned CountTriangles(BVHNode *root)
 {
     if (!root->IsLeaf()) {
 	BVHInner *p = dynamic_cast<BVHInner*>(root);
+        ASSERT_OR_DIE(p);
 	return CountTriangles(p->_left) + CountTriangles(p->_right);
     } else {
 	BVHLeaf *p = dynamic_cast<BVHLeaf*>(root);
+        ASSERT_OR_DIE(p);
 	return (unsigned) p->_triangles.size();
     }
 }
@@ -638,6 +642,7 @@ void CountDepth(BVHNode *root, int depth, int& maxDepth)
 	maxDepth=depth;
     if (!root->IsLeaf()) {
 	BVHInner *p = dynamic_cast<BVHInner*>(root);
+        ASSERT_OR_DIE(p);
 	CountDepth(p->_left, depth+1, maxDepth);
 	CountDepth(p->_right, depth+1, maxDepth);
     }
@@ -654,6 +659,7 @@ void Scene::PopulateCacheFriendlyBVH(
     _pCFBVH[currIdxBoxes]._top    = root->_top;
     if (!root->IsLeaf()) {
 	BVHInner *p = dynamic_cast<BVHInner*>(root);
+        ASSERT_OR_DIE(p);
 	int idxLeft = ++idxBoxes;
 	PopulateCacheFriendlyBVH(pFirstTriangle, p->_left, idxBoxes, idxTriList);
 	int idxRight = ++idxBoxes;
@@ -662,6 +668,7 @@ void Scene::PopulateCacheFriendlyBVH(
 	_pCFBVH[currIdxBoxes].u.inner._idxRight = idxRight;
     } else {
 	BVHLeaf *p = dynamic_cast<BVHLeaf*>(root);
+        ASSERT_OR_DIE(p);
 	unsigned count = (unsigned) p->_triangles.size();
 	_pCFBVH[currIdxBoxes].u.leaf._count = 0x80000000 | count;
 	_pCFBVH[currIdxBoxes].u.leaf._startIndexInTriIndexList = idxTriList;
@@ -748,10 +755,12 @@ void Scene::UpdateBoundingVolumeHierarchy(const char *filename, bool forceRecalc
 	    puts("Cache exists, reading the pre-calculated BVH data...");
 	    if (1 != fread(&_pCFBVH_No, sizeof(unsigned), 1, fp)) {
 		UpdateBoundingVolumeHierarchy(filename, true);
+                fclose(fp);
 		return;
 	    }
 	    if (1 != fread(&_triIndexListNo, sizeof(unsigned), 1, fp)) {
 		UpdateBoundingVolumeHierarchy(filename, true);
+                fclose(fp);
 		return;
 	    }
 	    _pCFBVH = new CacheFriendlyBVHNode[_pCFBVH_No];
@@ -762,6 +771,7 @@ void Scene::UpdateBoundingVolumeHierarchy(const char *filename, bool forceRecalc
 		_pCFBVH = NULL;
 		_triIndexList = NULL;
 		UpdateBoundingVolumeHierarchy(filename, true);
+                fclose(fp);
 		return;
 	    }
 	    if (_triIndexListNo != fread(_triIndexList, sizeof(int), _triIndexListNo, fp)) {
@@ -770,6 +780,7 @@ void Scene::UpdateBoundingVolumeHierarchy(const char *filename, bool forceRecalc
 		_pCFBVH = NULL;
 		_triIndexList = NULL;
 		UpdateBoundingVolumeHierarchy(filename, true);
+                fclose(fp);
 		return;
 	    }
 	    fclose(fp);
@@ -844,7 +855,9 @@ bool Scene::renderRaytracer(Camera& eye, Screen& canvas, bool antialias)
 	    if (antialias) percentage << "Anti-aliased r"; else percentage << "R";
 	    percentage << "aytracing... hit ESCAPE to abort (" << int(100.*y/HEIGHT) << "%)";
 	    static char asyncBufferForCaption[256];
-	    strcpy(asyncBufferForCaption, percentage.str().c_str());
+	    strncpy(asyncBufferForCaption, percentage.str().c_str(), sizeof(asyncBufferForCaption));
+            asyncBufferForCaption[sizeof(asyncBufferForCaption)-1] = '\0';
+
 	    SDL_WM_SetCaption(asyncBufferForCaption, asyncBufferForCaption);
 	    canvas.ShowScreen(true,false);
 	}

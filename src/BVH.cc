@@ -695,6 +695,9 @@ BVHNode *Recurse(int size, BBoxEntries& work, REPORTPRM(float pct=0.) int depth=
            newRangeL[0], newRangeL[1], newRangeR[0], newRangeR[1]);
     }
     #endif
+
+    _mm_free(left);
+    _mm_free(right);
     return inner;
 }
 
@@ -704,6 +707,8 @@ BVHNode *CreateBVH(const Scene *pScene)
 
     BBoxEntries work = (BBoxTmp*)_mm_malloc(pScene->_triangles.size()*sizeof(BBoxTmp), 16);
     __m128 bottom(_mm_set1_ps(FLT_MAX)), top(_mm_set1_ps(-FLT_MAX));
+
+    ASSERT_OR_DIE(pScene->_triangles.size());
 
     puts("Gathering bounding box info from all triangles...");
     for(unsigned j=0; j<pScene->_triangles.size(); j++) {
@@ -752,6 +757,7 @@ BVHNode *CreateBVH(const Scene *pScene)
     root->_bottom = b;
     root->_top = t;
 
+    _mm_free(work);
     return root;
 }
 

@@ -32,6 +32,7 @@
 
 #include "3d.h"
 #include "Screen.h"
+#include "Fillers.h"
 #include "Wu.h"
 
 // Clip distance for the triangles (they have a point closer than this, they dont get drawn)

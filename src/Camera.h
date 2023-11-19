@@ -20,7 +20,7 @@
 #ifndef __camera_h__
 #define __camera_h__
 
-#include "3d.h"
+#include "Types.h"
 #include "Algebra.h"
 
 struct Camera : public Vector3 {

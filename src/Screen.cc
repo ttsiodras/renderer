@@ -25,6 +25,7 @@
 
 #include "3d.h"
 #include "Screen.h"
+#include "Fillers.h"
 #include "OnlineHelpKeys.h"
 
 SDL_Surface *Screen::_surface = NULL;

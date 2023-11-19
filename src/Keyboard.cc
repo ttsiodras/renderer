@@ -34,7 +34,7 @@ Keyboard::~Keyboard()
 
 void Keyboard::poll(bool bYield)
 {
-    SDL_Event event;
+    SDL_Event event = {};
 
     if (bYield)
 	SDL_Delay(1);

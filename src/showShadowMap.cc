@@ -44,7 +44,6 @@ int main(int, char *[])
     Uint32 *offsets;
     Uint8 *buffer;
 
-    surface = NULL;
     offsets = new Uint32[HEI];
 
     for(int i=0; i<HEI; i++)
@@ -141,5 +140,6 @@ int main(int, char *[])
     if ( SDL_MUSTLOCK(surface) ) {
         SDL_UnlockSurface(surface);
     }
+    delete [] offsets;
     return 0;
 }

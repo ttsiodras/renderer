@@ -3,6 +3,15 @@
 
 *Screenshots, official tarballs, etc available at [main renderer page](https://www.thanassis.space/renderer.html)*
 
+```diff
+- WARNING: DO NOT use sdl12-compat to run this; it DESTROYS the performance
+- of the renderer; use only the original SDL 1.2.
+```
+
+There's an [issue](https://github.com/libsdl-org/sdl12-compat/issues/364) opened
+on the `sdl12-compat` repository, but until this is addressed, it makes no sense
+to run the renderer with it ; stick to SDL1.2 unless you are OK with 10x less speed.
+
 ## Introduction
 
 This package allows interactive 3D visualization of triangle meshes.

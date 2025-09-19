@@ -3,9 +3,11 @@
 
 *Screenshots, official tarballs, etc available at [main renderer page](https://www.thanassis.space/renderer.html)*
 
+## WARNING - DO NOT use sdl12-compat
+
 ```diff
-- WARNING: DO NOT use sdl12-compat to run this; it DESTROYS the performance
-- of the renderer; use only the original SDL 1.2.
+- DO NOT USE sdl12-compat to run the renderer; that library DESTROYS the performance,
+- running the code 5-10x slower... Only use the original SDL1.2 library.
 ```
 
 There's an [issue](https://github.com/libsdl-org/sdl12-compat/issues/364) opened

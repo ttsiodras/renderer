@@ -20,7 +20,7 @@
 #ifndef __CLOCK_H__
 #define __CLOCK_H__
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #include "Types.h"
 
 class Clock {

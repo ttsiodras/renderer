@@ -20,7 +20,7 @@
 #ifndef __KEYBOARD_H__
 #define __KEYBOARD_H__
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 
 struct Keyboard {
     Uint32 _isDown, _isUp, _isLeft, _isRight;

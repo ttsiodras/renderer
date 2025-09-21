@@ -23,7 +23,7 @@
 #include <algorithm>
 
 #include <math.h>
-#include <SDL.h>
+#include <SDL3/SDL.h>
 
 // The main floating point type, used everywhere
 // If you need more accuracy for some reason, use "double" (30% speed hit)

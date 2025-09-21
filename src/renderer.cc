@@ -19,7 +19,7 @@
 
 #define DEFINE_VARS
 
-#include "SDL.h"
+#include <SDL3/SDL.h>
 
 #include <config.h>
 
@@ -142,7 +142,7 @@ void ShowHelp(Screen& canvas, Keyboard& keys)
 {
     assert(sizeof(helpKeysImage) == HELPW*HELPH*3);
     Uint32 color = fast_SDL_MapRGB(canvas._surface->format, 0, 0, 0);
-    SDL_FillRect(canvas._surface, NULL, color);
+    SDL_FillSurfaceRect(canvas._surface, NULL, color);
     unsigned char *pData = helpKeysImage;
     for(int h=0; h<HELPH; h++)
 	for(int w=0; w<HELPW; w++) {

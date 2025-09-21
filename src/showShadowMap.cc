@@ -19,7 +19,7 @@
 
 #include <config.h>
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #include <iostream>
 #include <cstdlib>
 #include <limits>
@@ -40,6 +40,7 @@ typedef float coord;
 
 int main(int, char *[])
 {
+    SDL_Window *window;
     SDL_Surface *surface;
     Uint32 *offsets;
     Uint8 *buffer;
@@ -49,7 +50,8 @@ int main(int, char *[])
     for(int i=0; i<HEI; i++)
         offsets[i] = i*WID*3;
 
-    if ( SDL_Init(SDL_INIT_VIDEO) < 0 ) {
+    window = SDL_CreateWindow("Shadow Renderer", WID, HEI, 0);
+    if ( !window ) {
         cerr << "Couldn't initialize SDL: " <<  SDL_GetError() << endl;
         exit(0);
     }
@@ -57,27 +59,15 @@ int main(int, char *[])
     // Clean up on exit
     atexit(SDL_Quit);
 
-    surface = SDL_SetVideoMode( WID, HEI, 24, SDL_HWSURFACE | SDL_HWPALETTE);
+    surface = SDL_GetWindowSurface(window);
     if (!surface) {
         cerr << "Couldn't set video mode: " << SDL_GetError() << endl;
         exit(0);
     }
 
 
-    if ( SDL_MUSTLOCK(surface) ) {
-        if ( SDL_LockSurface(surface) < 0 ) {
-            cerr << "Couldn't lock surface: " <<
-            SDL_GetError() << endl;
-            exit(0);
-        }
-    }
-
     buffer = (Uint8 *) surface->pixels;
-    memset(buffer, 64, WID*HEI*3);
-
-
-    SDL_WM_SetCaption("Shadow Renderer", "Shadow Renderer");
-    SDL_EnableUNICODE(1);
+    memset(buffer, 64, WID*HEI*4);
 
     union {
 	coord away; // this used to be -numeric_limits<coord>::max())
@@ -111,25 +101,16 @@ int main(int, char *[])
                 line[i] = 1.0/line[i];
                 color = (Uint8) (255.0-255.0*(line[i]-fmin)/(fmax-fmin));
             }
-            buffer[SHADOWMAPSIZE*3*(SHADOWMAPSIZE-1-i)+j*3+0] = color;
-            buffer[SHADOWMAPSIZE*3*(SHADOWMAPSIZE-1-i)+j*3+1] = color;
-            buffer[SHADOWMAPSIZE*3*(SHADOWMAPSIZE-1-i)+j*3+2] = color;
+            buffer[SHADOWMAPSIZE*4*(SHADOWMAPSIZE-1-i)+j*4+0] = color;
+            buffer[SHADOWMAPSIZE*4*(SHADOWMAPSIZE-1-i)+j*4+1] = color;
+            buffer[SHADOWMAPSIZE*4*(SHADOWMAPSIZE-1-i)+j*4+2] = color;
+            buffer[SHADOWMAPSIZE*4*(SHADOWMAPSIZE-1-i)+j*4+3] = 0xff;
         }
         j++;
     }
 
     cout << "Min: " << fmin << " - Max: " << fmax << endl;
-    if ( SDL_MUSTLOCK(surface) ) {
-        SDL_UnlockSurface(surface);
-    }
-    SDL_UpdateRect(surface, 0, 0, WID, HEI);
-    if ( SDL_MUSTLOCK(surface) ) {
-        if ( SDL_LockSurface(surface) < 0 ) {
-            cerr << "Couldn't lock surface: " <<
-            SDL_GetError() << endl;
-            exit(0);
-        }
-    }
+    SDL_UpdateWindowSurface(window);
 
     Keyboard keys;
     keys.poll();
@@ -137,9 +118,6 @@ int main(int, char *[])
         keys.poll();
     }
 
-    if ( SDL_MUSTLOCK(surface) ) {
-        SDL_UnlockSurface(surface);
-    }
     delete [] offsets;
     return 0;
 }

@@ -27,7 +27,7 @@
 #include <string>
 #include <vector>
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 
 #include "Types.h"
 #include "Base3d.h"
@@ -48,6 +48,7 @@ void DrawPixelBasic(int y, int x, Uint32 color);
 
 struct Screen
 {
+    static SDL_Window *_window;
     static SDL_Surface *_surface;
     coord _Zbuffer[HEIGHT][WIDTH];
     const struct Scene& _scene;
@@ -60,7 +61,8 @@ struct Screen
 	:
 	_scene(scene)
     {
-	if ( SDL_Init(SDL_INIT_VIDEO) < 0 ) {
+    _window = SDL_CreateWindow( "Test", WIDTH, HEIGHT, 0 );
+	if ( !_window ) {
 	    std::cerr << "Couldn't initialize SDL: " <<  SDL_GetError() << std::endl;
 	    exit(0);
 	}
@@ -69,21 +71,10 @@ struct Screen
 	atexit(SDL_Quit);
 
 	// We ask for 32bit surface...
-	_surface = SDL_SetVideoMode( WIDTH, HEIGHT, 32, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_HWACCEL | SDL_ASYNCBLIT);
-	if (!_surface)
-	    // ...and if that fails, we settle for a software-emulation of 16bit
-	    _surface = SDL_SetVideoMode( WIDTH, HEIGHT, 16, SDL_SWSURFACE | SDL_DOUBLEBUF);
-
+	_surface = SDL_GetWindowSurface( _window );
 	if (!_surface) {
 	    std::cerr << "Couldn't set video mode: " << SDL_GetError() << std::endl;
 	    exit(0);
-	}
-
-	if ( SDL_MUSTLOCK(_surface) ) {
-	    if ( SDL_LockSurface(_surface) < 0 ) {
-		std::cerr << "Couldn't lock _surface: " << SDL_GetError() << std::endl;
-		exit(0);
-	    }
 	}
 
 	//
@@ -98,7 +89,7 @@ struct Screen
 	// Speed is a most important attribute - for a renderer...
 	//
 	std::cout << "Selected pixel plotter: ";
-	switch(_surface->format->BytesPerPixel) {
+	switch(SDL_BYTESPERPIXEL(_surface->format)) {
 	case 1: DrawPixel = &DrawPixelBasic<1>; std::cout << "1" << std::endl; break;
 	case 2: DrawPixel = &DrawPixelBasic<2>; std::cout << "2" << std::endl; break;
 	case 3: DrawPixel = &DrawPixelBasic<3>; std::cout << "3" << std::endl; break;
@@ -114,13 +105,10 @@ struct Screen
 
     ~Screen()
     {
-	if ( SDL_MUSTLOCK(_surface) )
-	    SDL_UnlockSurface(_surface);
     }
 
     void ClearScreen() {
-	Uint32 color = fast_SDL_MapRGB(_surface->format, 0, 0, 0);
-	SDL_FillRect(_surface, NULL, color);
+	SDL_FillSurfaceRect(_surface, NULL, 0);
     }
 
     void ClearZbuffer() {
@@ -155,19 +143,7 @@ struct Screen
 	    }
 	}
 
-	if ( SDL_MUSTLOCK(_surface) ) {
-	    SDL_UnlockSurface(_surface);
-	}
-	if (raytracerOutput)
-	    SDL_UpdateRect(_surface, 0, 0, 0, 0);
-	else
-	    SDL_Flip(_surface);
-	if ( SDL_MUSTLOCK(_surface) ) {
-	    if ( SDL_LockSurface(_surface) < 0 ) {
-		std::cerr << "Couldn't lock _surface: " << SDL_GetError() << std::endl;
-		exit(0);
-	    }
-	}
+        SDL_UpdateWindowSurface(_window);
     }
 
 
@@ -327,19 +303,6 @@ void DrawPixelBasic(int y, int x, Uint32 color)
 
 	    bufp = (Uint16 *)_surface->pixels + y*_surface->pitch/2 + x;
 	    *bufp = color;
-	}
-	break;
-
-	case 3: { /* Slow 24-bpp mode, usually not used */
-	    Uint8 *bufp;
-
-	    bufp = (Uint8 *)_surface->pixels + y*_surface->pitch + x;
-	    *(bufp+_surface->format->Rshift/8) =
-		((color & _surface->format->Rmask) >> _surface->format->Rshift) << _surface->format->Rloss;
-	    *(bufp+_surface->format->Gshift/8) =
-		((color & _surface->format->Gmask) >> _surface->format->Gshift) << _surface->format->Gloss;
-	    *(bufp+_surface->format->Bshift/8) =
-		((color & _surface->format->Bmask) >> _surface->format->Bshift) << _surface->format->Bloss;
 	}
 	break;
 

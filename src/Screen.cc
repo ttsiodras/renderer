@@ -28,6 +28,7 @@
 #include "Fillers.h"
 #include "OnlineHelpKeys.h"
 
+SDL_Window *Screen::_window = NULL;
 SDL_Surface *Screen::_surface = NULL;
 Screen::DrawPixelFun Screen::DrawPixel = NULL;
 

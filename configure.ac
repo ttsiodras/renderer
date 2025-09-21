@@ -56,9 +56,11 @@ AC_PROG_RANLIB
 AC_LANG(C++)
 
 # Check for SDL (minimum: 1.2.0)
-SDL_VERSION=1.2.0
-AM_PATH_SDL($SDL_VERSION, :,
-            AC_MSG_ERROR([*** SDL version $SDL_VERSION or later was not found!]))
+#SDL_VERSION=1.2.0
+#AM_PATH_SDL($SDL_VERSION, :,
+#            AC_MSG_ERROR([*** SDL version $SDL_VERSION or later was not found!]))
+SDL_CFLAGS=
+SDL_LIBS=-lSDL3
 AC_SUBST(SDL_CFLAGS)
 AC_SUBST(SDL_LIBS)
 

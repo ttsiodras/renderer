@@ -19,7 +19,7 @@
 
 #include <cfloat>
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 
 #include "3d.h"
 #include "Screen.h"

@@ -25,7 +25,9 @@
 
 #include "config.h"
 
-#include "SDL.h"
+#include <SDL3/SDL.h>
+
+#include "sdl12compat_workaround.h"
 
 #include "BVH.h"
 #include "Base3d.h"

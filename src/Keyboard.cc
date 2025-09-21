@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+#include <cstdlib>
 
 #include "Keyboard.h"
 
@@ -41,23 +42,23 @@ void Keyboard::poll(bool bYield)
     if(SDL_PollEvent(&event)) {
 
         switch(event.type) {
-        case SDL_KEYDOWN:
+        case SDL_EVENT_KEY_DOWN:
             {
-                switch(event.key.keysym.sym) {
+                switch(event.key.key) {
                 case SDLK_UP: _isUp = 1; break;
                 case SDLK_DOWN: _isDown = 1; break;
                 case SDLK_LEFT: _isLeft = 1; break;
                 case SDLK_RIGHT: _isRight = 1; break;
-                case SDLK_a: _isForward = 1; break;
-                case SDLK_z: _isBackward = 1; break;
-                case SDLK_w: _isLight = 1; break;
-                case SDLK_q: _isLight2 = 1; break;
-                case SDLK_s: _isS = 1; break;
-                case SDLK_d: _isD = 1; break;
-                case SDLK_f: _isF = 1; break;
-                case SDLK_e: _isE = 1; break;
-                case SDLK_r: _isR = 1; break;
-                case SDLK_h: _isH = 1; break;
+                case SDLK_A: _isForward = 1; break;
+                case SDLK_Z: _isBackward = 1; break;
+                case SDLK_W: _isLight = 1; break;
+                case SDLK_Q: _isLight2 = 1; break;
+                case SDLK_S: _isS = 1; break;
+                case SDLK_D: _isD = 1; break;
+                case SDLK_F: _isF = 1; break;
+                case SDLK_E: _isE = 1; break;
+                case SDLK_R: _isR = 1; break;
+                case SDLK_H: _isH = 1; break;
                 case SDLK_ESCAPE: _isAbort = 1; break;
                 case SDLK_PAGEDOWN: _isPgDown = 1; break;
                 case SDLK_PAGEUP: _isPgUp = 1; break;
@@ -75,23 +76,23 @@ void Keyboard::poll(bool bYield)
                 }
             }
             break;
-        case SDL_KEYUP:
+        case SDL_EVENT_KEY_UP:
             {
-                switch(event.key.keysym.sym) {
+                switch(event.key.key) {
                 case SDLK_UP: _isUp = 0; break;
                 case SDLK_DOWN: _isDown = 0; break;
                 case SDLK_LEFT: _isLeft = 0; break;
                 case SDLK_RIGHT: _isRight = 0; break;
-                case SDLK_a: _isForward = 0; break;
-                case SDLK_z: _isBackward = 0; break;
-                case SDLK_w: _isLight = 0; break;
-                case SDLK_q: _isLight2 = 0; break;
-                case SDLK_s: _isS = 0; break;
-                case SDLK_d: _isD = 0; break;
-                case SDLK_f: _isF = 0; break;
-                case SDLK_e: _isE = 0; break;
-                case SDLK_r: _isR = 0; break;
-                case SDLK_h: _isH = 0; break;
+                case SDLK_A: _isForward = 0; break;
+                case SDLK_Z: _isBackward = 0; break;
+                case SDLK_W: _isLight = 0; break;
+                case SDLK_Q: _isLight2 = 0; break;
+                case SDLK_S: _isS = 0; break;
+                case SDLK_D: _isD = 0; break;
+                case SDLK_F: _isF = 0; break;
+                case SDLK_E: _isE = 0; break;
+                case SDLK_R: _isR = 0; break;
+                case SDLK_H: _isH = 0; break;
                 case SDLK_ESCAPE: _isAbort = 0; break;
                 case SDLK_PAGEDOWN: _isPgDown = 0; break;
                 case SDLK_PAGEUP: _isPgUp = 0; break;
@@ -109,7 +110,7 @@ void Keyboard::poll(bool bYield)
                 }
             }
             break;
-	case SDL_QUIT: // Thanks, partisann/reddit
+	case SDL_EVENT_QUIT: // Thanks, partisann/reddit
 	    exit(1);
 	    break;
         default:

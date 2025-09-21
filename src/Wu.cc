@@ -15,7 +15,7 @@ LGPL (c) A. Schiffler
 #include <math.h>
 #include <string.h>
 
-#include <SDL.h>
+#include <SDL3/SDL.h>
 
 #include "sdl12compat_workaround.h"
 
@@ -26,10 +26,17 @@ LGPL (c) A. Schiffler
 
 /* ----- Defines for pixel clipping tests */
 
+#if 1
+#define clip_xmin(surface) 0
+#define clip_xmax(surface) surface->w-1
+#define clip_ymin(surface) 0
+#define clip_ymax(surface) surface->h-1
+#else
 #define clip_xmin(surface) surface->clip_rect.x
 #define clip_xmax(surface) surface->clip_rect.x+surface->clip_rect.w-1
 #define clip_ymin(surface) surface->clip_rect.y
 #define clip_ymax(surface) surface->clip_rect.y+surface->clip_rect.h-1
+#endif
 
 /*!
 \brief Internal pixel drawing function with alpha blending where input color in in destination format.
@@ -48,7 +55,7 @@ Only the bits up to the surface depth are significant in the color value.
 */
 static int _putPixelAlpha(SDL_Surface *dst, Sint16 x, Sint16 y, Uint32 color, Uint8 alpha)
 {
-	SDL_PixelFormat *format;
+	const SDL_PixelFormatDetails *format;
 	Uint32 Rmask, Gmask, Bmask, Amask;
 	Uint32 Rshift, Gshift, Bshift, Ashift;
 	Uint32 R, G, B, A;
@@ -62,16 +69,16 @@ static int _putPixelAlpha(SDL_Surface *dst, Sint16 x, Sint16 y, Uint32 color, Ui
 		y >= clip_ymin(dst) && y <= clip_ymax(dst)) 
 	{
 
-		format = dst->format;
+		format = SDL_GetPixelFormatDetails( dst->format );
 
-		switch (format->BytesPerPixel) {
+		switch (format->bytes_per_pixel) {
 	case 1:
 		{		/* Assuming 8-bpp */
 			if (alpha == 255) {
 				*((Uint8 *) dst->pixels + y * dst->pitch + x) = color;
 			} else {
 				Uint8 *pixel = (Uint8 *) dst->pixels + y * dst->pitch + x;
-				SDL_Palette *palette = format->palette;
+				SDL_Palette *palette = SDL_GetSurfacePalette( dst );
 				SDL_Color *colors = palette->colors;
 				SDL_Color dColor = colors[*pixel];
 				SDL_Color sColor = colors[color];
@@ -86,7 +93,7 @@ static int _putPixelAlpha(SDL_Surface *dst, Sint16 x, Sint16 y, Uint32 color, Ui
 				dG = dG + ((sG - dG) * alpha >> 8);
 				dB = dB + ((sB - dB) * alpha >> 8);
 
-				*pixel = fast_SDL_MapRGB(format, dR, dG, dB);
+				*pixel = fast_SDL_MapRGB(dst->format, dR, dG, dB);
 			}
 		}
 		break;
@@ -111,53 +118,6 @@ static int _putPixelAlpha(SDL_Surface *dst, Sint16 x, Sint16 y, Uint32 color, Ui
 				} else 
 					A = 0;
 				*pixel = R | G | B | A;
-			}
-		}
-		break;
-
-	case 3: 
-		{		/* Slow 24-bpp mode, usually not used */
-			Uint8 Rshift8, Gshift8, Bshift8, Ashift8;
-			Uint8 *pixel = (Uint8 *) dst->pixels + y * dst->pitch + x * 3;
-
-			Rshift = format->Rshift;
-			Gshift = format->Gshift;
-			Bshift = format->Bshift;
-			Ashift = format->Ashift;
-
-			Rshift8 = Rshift / 8;
-			Gshift8 = Gshift / 8;
-			Bshift8 = Bshift / 8;
-			Ashift8 = Ashift / 8;
-
-			if (alpha == 255) {
-				*(pixel + Rshift8) = color >> Rshift;
-				*(pixel + Gshift8) = color >> Gshift;
-				*(pixel + Bshift8) = color >> Bshift;
-				*(pixel + Ashift8) = color >> Ashift;
-			} else {
-				Uint8 dR, dG, dB, dA = 0;
-				Uint8 sR, sG, sB, sA = 0;
-
-				dR = *((pixel) + Rshift8);
-				dG = *((pixel) + Gshift8);
-				dB = *((pixel) + Bshift8);
-				dA = *((pixel) + Ashift8);
-
-				sR = (color >> Rshift) & 0xff;
-				sG = (color >> Gshift) & 0xff;
-				sB = (color >> Bshift) & 0xff;
-				sA = (color >> Ashift) & 0xff;
-
-				dR = dR + ((sR - dR) * alpha >> 8);
-				dG = dG + ((sG - dG) * alpha >> 8);
-				dB = dB + ((sB - dB) * alpha >> 8);
-				dA = dA + ((sA - dA) * alpha >> 8);
-
-				*((pixel) + Rshift8) = dR;
-				*((pixel) + Gshift8) = dG;
-				*((pixel) + Bshift8) = dB;
-				*((pixel) + Ashift8) = dA;
 			}
 		}
 		break;
@@ -268,7 +228,7 @@ static int pixelColor(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color)
 	*/
 	alpha = color & 0x000000ff;
 	mcolor =
-		SDL_MapRGBA(dst->format, (color & 0xff000000) >> 24,
+		SDL_MapSurfaceRGBA(dst, (color & 0xff000000) >> 24,
 		(color & 0x00ff0000) >> 16, (color & 0x0000ff00) >> 8, alpha);
 
 	/*
@@ -300,7 +260,7 @@ static int pixelColorNolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color)
 	*/
 	alpha = color & 0x000000ff;
 	mcolor =
-		SDL_MapRGBA(dst->format, (color & 0xff000000) >> 24,
+		SDL_MapSurfaceRGBA(dst, (color & 0xff000000) >> 24,
 		(color & 0x00ff0000) >> 16, (color & 0x0000ff00) >> 8, alpha);
 
 	/*
@@ -329,20 +289,20 @@ Assumes color is in destination format.
 */
 static int _filledRectAlpha(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color, Uint8 alpha)
 {
-	SDL_PixelFormat *format;
+	const SDL_PixelFormatDetails *format;
 	Uint32 Rmask, Bmask, Gmask, Amask;
 	Uint32 Rshift, Bshift, Gshift, Ashift;
 	Uint8 sR, sG, sB, sA;
 	Uint32 R, G, B, A;
 	Sint16 x, y;
 
-	format = dst->format;
-	switch (format->BytesPerPixel) {
+	format = SDL_GetPixelFormatDetails( dst->format );
+	switch (format->bytes_per_pixel) {
 	case 1:
 		{			/* Assuming 8-bpp */
 			Uint8 *row, *pixel;
 			Uint8 dR, dG, dB;
-			SDL_Palette *palette = format->palette;
+			SDL_Palette *palette = SDL_GetSurfacePalette( dst );
 			SDL_Color *colors = palette->colors;
 			sR = colors[color].r;
 			sG = colors[color].g;
@@ -361,7 +321,7 @@ static int _filledRectAlpha(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, 
 					dG = dG + ((sG - dG) * alpha >> 8);
 					dB = dB + ((sB - dB) * alpha >> 8);
 
-					*pixel = fast_SDL_MapRGB(format, dR, dG, dB);
+					*pixel = SDL_MapRGB(format, palette, dR, dG, dB);
 				}
 			}
 		}
@@ -565,7 +525,7 @@ static int filledRectAlpha(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, S
 	*/
 	alpha = color & 0x000000ff;
 	mcolor =
-		SDL_MapRGBA(dst->format, (color & 0xff000000) >> 24,
+		SDL_MapSurfaceRGBA(dst, (color & 0xff000000) >> 24,
 		(color & 0x00ff0000) >> 16, (color & 0x0000ff00) >> 8, alpha);
 
 	/*
@@ -659,12 +619,14 @@ static int hlineColor(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 
 	Uint8 *colorptr;
 	Uint8 color3[3];
 
+#if 0
 	/*
 	* Check visibility of clipping rectangle
 	*/
 	if ((dst->clip_rect.w==0) || (dst->clip_rect.h==0)) {
 		return(0);
 	}
+#endif
 
 	/*
 	* Swap x1, x2 if required to ensure x1<=x2
@@ -679,16 +641,16 @@ static int hlineColor(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 
 	* Get clipping boundary and
 	* check visibility of hline 
 	*/
-	left = dst->clip_rect.x;
+	left = clip_xmin(dst);
 	if (x2<left) {
 		return(0);
 	}
-	right = dst->clip_rect.x + dst->clip_rect.w - 1;
+	right = clip_xmax(dst);
 	if (x1>right) {
 		return(0);
 	}
-	top = dst->clip_rect.y;
-	bottom = dst->clip_rect.y + dst->clip_rect.h - 1;
+	top = clip_ymin(dst);
+	bottom = clip_ymax(dst);
 	if ((y<top) || (y>bottom)) {
 		return (0);
 	}
@@ -722,22 +684,22 @@ static int hlineColor(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 
 		*/
 		colorptr = (Uint8 *) & color;
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
-			color = SDL_MapRGBA(dst->format, colorptr[0], colorptr[1], colorptr[2], colorptr[3]);
+			color = SDL_MapSurfaceRGBA(dst, colorptr[0], colorptr[1], colorptr[2], colorptr[3]);
 		} else {
-			color = SDL_MapRGBA(dst->format, colorptr[3], colorptr[2], colorptr[1], colorptr[0]);
+			color = SDL_MapSurfaceRGBA(dst, colorptr[3], colorptr[2], colorptr[1], colorptr[0]);
 		}
 
 		/*
 		* More variable setup 
 		*/
-		pixx = dst->format->BytesPerPixel;
+		pixx = SDL_BYTESPERPIXEL(dst->format);
 		pixy = dst->pitch;
 		pixel = ((Uint8 *) dst->pixels) + pixx * (int) x1 + pixy * (int) y;
 
 		/*
 		* Draw 
 		*/
-		switch (dst->format->BytesPerPixel) {
+		switch (SDL_BYTESPERPIXEL(dst->format)) {
 	case 1:
 		memset(pixel, color, dx + 1);
 		break;
@@ -809,12 +771,14 @@ static int vlineColor(SDL_Surface * dst, Sint16 x, Sint16 y1, Sint16 y2, Uint32 
 	int result;
 	Uint8 *colorptr;
 
+#if 0
 	/*
 	* Check visibility of clipping rectangle
 	*/
 	if ((dst->clip_rect.w==0) || (dst->clip_rect.h==0)) {
 		return(0);
 	}
+#endif
 
 	/*
 	* Swap y1, y2 if required to ensure y1<=y2
@@ -829,16 +793,16 @@ static int vlineColor(SDL_Surface * dst, Sint16 x, Sint16 y1, Sint16 y2, Uint32 
 	* Get clipping boundary and
 	* check visibility of vline 
 	*/
-	left = dst->clip_rect.x;
-	right = dst->clip_rect.x + dst->clip_rect.w - 1;
+	left = clip_xmin(dst);
+	right = clip_xmax(dst);
 	if ((x<left) || (x>right)) {
 		return (0);
 	}    
-	top = dst->clip_rect.y;
+	top = clip_ymin(dst);
 	if (y2<top) {
 		return(0);
 	}
-	bottom = dst->clip_rect.y + dst->clip_rect.h - 1;
+	bottom = clip_ymax(dst);
 	if (y1>bottom) {
 		return(0);
 	}
@@ -872,16 +836,16 @@ static int vlineColor(SDL_Surface * dst, Sint16 x, Sint16 y1, Sint16 y2, Uint32 
 		*/
 		colorptr = (Uint8 *) & color;
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
-			color = SDL_MapRGBA(dst->format, colorptr[0], colorptr[1], colorptr[2], colorptr[3]);
+			color = SDL_MapSurfaceRGBA(dst, colorptr[0], colorptr[1], colorptr[2], colorptr[3]);
 		} else {
-			color = SDL_MapRGBA(dst->format, colorptr[3], colorptr[2], colorptr[1], colorptr[0]);
+			color = SDL_MapSurfaceRGBA(dst, colorptr[3], colorptr[2], colorptr[1], colorptr[0]);
 		}
 
 		/*
 		* More variable setup 
 		*/
 		dy = h;
-		pixx = dst->format->BytesPerPixel;
+		pixx = SDL_BYTESPERPIXEL(dst->format);
 		pixy = dst->pitch;
 		pixel = ((Uint8 *) dst->pixels) + pixx * (int) x + pixy * (int) y1;
 		pixellast = pixel + pixy * dy;
@@ -889,7 +853,7 @@ static int vlineColor(SDL_Surface * dst, Sint16 x, Sint16 y1, Sint16 y2, Uint32 
 		/*
 		* Draw 
 		*/
-		switch (dst->format->BytesPerPixel) {
+		switch (SDL_BYTESPERPIXEL(dst->format)) {
 	case 1:
 		for (; pixel <= pixellast; pixel += pixy) {
 			*(Uint8 *) pixel = color;
@@ -1000,10 +964,10 @@ static int _clipLine(SDL_Surface * dst, Sint16 * x1, Sint16 * y1, Sint16 * x2, S
 	/*
 	* Get clipping boundary 
 	*/
-	left = dst->clip_rect.x;
-	right = dst->clip_rect.x + dst->clip_rect.w - 1;
-	top = dst->clip_rect.y;
-	bottom = dst->clip_rect.y + dst->clip_rect.h - 1;
+	left = clip_xmin(dst);
+	right = clip_xmax(dst);
+	top = clip_ymin(dst);
+	bottom = clip_ymax(dst);
 
 	while (1) {
 		code1 = _clipEncode(*x1, *y1, left, top, right, bottom);
@@ -1134,9 +1098,9 @@ static int lineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 
 		*/
 		colorptr = (Uint8 *) & color;
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
-			color = SDL_MapRGBA(dst->format, colorptr[0], colorptr[1], colorptr[2], colorptr[3]);
+			color = SDL_MapSurfaceRGBA(dst, colorptr[0], colorptr[1], colorptr[2], colorptr[3]);
 		} else {
-			color = SDL_MapRGBA(dst->format, colorptr[3], colorptr[2], colorptr[1], colorptr[0]);
+			color = SDL_MapSurfaceRGBA(dst, colorptr[3], colorptr[2], colorptr[1], colorptr[0]);
 		}
 
 		/*
@@ -1144,7 +1108,7 @@ static int lineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 
 		*/
 		dx = sx * dx + 1;
 		dy = sy * dy + 1;
-		pixx = dst->format->BytesPerPixel;
+		pixx = SDL_BYTESPERPIXEL(dst->format);
 		pixy = dst->pitch;
 		pixel = ((Uint8 *) dst->pixels) + pixx * (int) x1 + pixy * (int) y1;
 		pixx *= sx;
@@ -1163,7 +1127,7 @@ static int lineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 
 		*/
 		x = 0;
 		y = 0;
-		switch (dst->format->BytesPerPixel) {
+		switch (SDL_BYTESPERPIXEL(dst->format)) {
 	case 1:
 		for (; x < dx; x++, pixel += pixx) {
 			*pixel = color;
@@ -1289,12 +1253,14 @@ static int _aalineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint
 	Uint32 erracctmp, wgt;
 	int dx, dy, tmp, xdir, y0p1, x0pxdir;
 
+#if 0
 	/*
 	* Check visibility of clipping rectangle
 	*/
 	if ((dst->clip_rect.w==0) || (dst->clip_rect.h==0)) {
 		return(0);
 	}
+#endif
 
 	/*
 	* Clip line and test if we have to draw 
